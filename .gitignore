@@ -1,0 +1,11 @@
+.DS_Store
+
+.vscode
+
+/backend/*.pyc
+
+/frontend/node_modules
+/frontend/npm-debug.log*
+/frontend/dist
+
+/.db

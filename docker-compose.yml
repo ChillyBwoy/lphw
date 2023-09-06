@@ -1,0 +1,13 @@
+version: "3"
+services:
+  db:
+    image: postgres:15.4-alpine
+    container_name: lphw_db_dev
+    ports:
+      - 5432:5432
+    volumes:
+      - .db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: lphw
+      POSTGRES_PASSWORD: verystrongandsecurepassword
+      POSTGRES_DB: lphw_dev
