@@ -14,12 +14,12 @@ router = APIRouter()
 
 
 @router.get("/", response_model=Page[schemas.Robot])
-async def get_robots(db: Session = Depends(get_db)):
+async def list(db: Session = Depends(get_db)):
     return paginate(db, select(Robot).order_by(Robot.created_at))
 
 
-@router.get("/{robot_id}", response_model=schemas.Robot)
-async def one(robot_id: uuid.UUID, db: Session = Depends(get_db)):
+@router.get("/{id}", response_model=schemas.Robot)
+async def show(robot_id: uuid.UUID, db: Session = Depends(get_db)):
     return repo.one(db, robot_id=robot_id)
 
 
@@ -32,7 +32,7 @@ async def create(robot: schemas.RobotCreate, db: Session = Depends(get_db)):
     return repo.create(db, robot_create=robot)
 
 
-@router.put("/{robot_id}", response_model=schemas.Robot)
+@router.put("/{id}", response_model=schemas.Robot)
 async def update(robot_id: uuid.UUID, robot: schemas.RobotUpdate, db: Session = Depends(get_db)):
     db_robot = repo.one(db, robot_id=robot_id)
     if not db_robot:
@@ -41,7 +41,7 @@ async def update(robot_id: uuid.UUID, robot: schemas.RobotUpdate, db: Session = 
     return repo.update(db, robot=db_robot, robot_update=robot)
 
 
-@router.delete("/{robot_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
 async def destroy(robot_id: uuid.UUID, db: Session = Depends(get_db)):
     db_robot = repo.one(db, robot_id=robot_id)
     if not db_robot:

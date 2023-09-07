@@ -1,5 +1,5 @@
 <script setup lang="ts"></script>
 
 <template>
-  <main>main</main>
+  <h1>Robot</h1>
 </template>
