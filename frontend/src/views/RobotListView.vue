@@ -2,6 +2,8 @@
 import { ApiClient } from "@/client";
 import { useFetchData } from "@/hooks/useFetchData";
 
+import RobotList from "@/components/RobotList.vue";
+
 const apiClient = new ApiClient({
   BASE: "http://localhost:8000",
 });
@@ -19,11 +21,7 @@ const [$robotsData, $robotsStatus] = useFetchData(fetchRobots, true);
 
   <div v-if="$robotsStatus === 'loading'">Loading...</div>
   <div v-if="$robotsStatus === 'error'">Error</div>
-  <div v-if="$robotsStatus === 'success'">
-    <ul>
-      <li v-for="robot in $robotsData?.items" :key="robot.id">
-        {{ robot.name }}
-      </li>
-    </ul>
+  <div v-if="$robotsStatus === 'success' && $robotsData">
+    <RobotList :robots="$robotsData.items" />
   </div>
 </template>
