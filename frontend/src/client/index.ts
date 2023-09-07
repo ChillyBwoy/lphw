@@ -18,4 +18,4 @@ export { RobotStatus } from "./models/RobotStatus";
 export type { RobotUpdate } from "./models/RobotUpdate";
 export type { ValidationError } from "./models/ValidationError";
 
-export { RobotService } from "./services/RobotService";
+export { RobotsService } from "./services/RobotsService";

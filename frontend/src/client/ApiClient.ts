@@ -6,12 +6,12 @@ import type { BaseHttpRequest } from "./core/BaseHttpRequest";
 import type { OpenAPIConfig } from "./core/OpenAPI";
 import { FetchHttpRequest } from "./core/FetchHttpRequest";
 
-import { RobotService } from "./services/RobotService";
+import { RobotsService } from "./services/RobotsService";
 
 type HttpRequestConstructor = new (config: OpenAPIConfig) => BaseHttpRequest;
 
 export class ApiClient {
-  public readonly robot: RobotService;
+  public readonly robots: RobotsService;
 
   public readonly request: BaseHttpRequest;
 
@@ -28,6 +28,6 @@ export class ApiClient {
       ENCODE_PATH: config?.ENCODE_PATH,
     });
 
-    this.robot = new RobotService(this.request);
+    this.robots = new RobotsService(this.request);
   }
 }

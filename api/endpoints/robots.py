@@ -10,7 +10,7 @@ from ..database import get_db
 from ..repositories import robots as repo
 from ..models import Robot
 
-router = APIRouter(prefix="/robots", tags=["robot"])
+router = APIRouter(prefix="/robots", tags=["robots"])
 
 
 @router.get("/", response_model=Page[schemas.Robot])

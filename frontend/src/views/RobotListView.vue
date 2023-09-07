@@ -7,7 +7,7 @@ const apiClient = new ApiClient({
 });
 
 const fetchRobots = () =>
-  apiClient.robot.robotList({
+  apiClient.robots.list({
     size: 10,
   });
 

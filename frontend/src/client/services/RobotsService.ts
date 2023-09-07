@@ -10,7 +10,7 @@ import type { RobotUpdate } from "../models/RobotUpdate";
 import type { CancelablePromise } from "../core/CancelablePromise";
 import type { BaseHttpRequest } from "../core/BaseHttpRequest";
 
-export class RobotService {
+export class RobotsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
@@ -18,7 +18,7 @@ export class RobotService {
    * @returns Page_Robot_ Successful Response
    * @throws ApiError
    */
-  public robotList({
+  public list({
     page = 1,
     size = 50,
   }: {
@@ -49,7 +49,7 @@ export class RobotService {
    * @returns Robot Successful Response
    * @throws ApiError
    */
-  public robotCreate({ requestBody }: { requestBody: RobotCreate }): CancelablePromise<Robot> {
+  public create({ requestBody }: { requestBody: RobotCreate }): CancelablePromise<Robot> {
     return this.httpRequest.request({
       method: "POST",
       url: "/api/v1/robots/",
@@ -66,7 +66,7 @@ export class RobotService {
    * @returns Robot Successful Response
    * @throws ApiError
    */
-  public robotShow({ robotId }: { robotId: string }): CancelablePromise<Robot> {
+  public show({ robotId }: { robotId: string }): CancelablePromise<Robot> {
     return this.httpRequest.request({
       method: "GET",
       url: "/api/v1/robots/{id}",
@@ -84,13 +84,7 @@ export class RobotService {
    * @returns Robot Successful Response
    * @throws ApiError
    */
-  public robotUpdate({
-    robotId,
-    requestBody,
-  }: {
-    robotId: string;
-    requestBody: RobotUpdate;
-  }): CancelablePromise<Robot> {
+  public update({ robotId, requestBody }: { robotId: string; requestBody: RobotUpdate }): CancelablePromise<Robot> {
     return this.httpRequest.request({
       method: "PUT",
       url: "/api/v1/robots/{id}",
@@ -110,7 +104,7 @@ export class RobotService {
    * @returns void
    * @throws ApiError
    */
-  public robotDestroy({ robotId }: { robotId: string }): CancelablePromise<void> {
+  public destroy({ robotId }: { robotId: string }): CancelablePromise<void> {
     return this.httpRequest.request({
       method: "DELETE",
       url: "/api/v1/robots/{id}",
