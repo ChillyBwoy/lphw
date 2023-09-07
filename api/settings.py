@@ -1,7 +1,7 @@
 import os
 
-from functools import lru_cache
 from typing import Optional
+from functools import lru_cache
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic.networks import PostgresDsn
 
@@ -42,7 +42,7 @@ class ProdConfig(BaseConfig):
 
 
 @lru_cache(maxsize=128)
-def get_config() -> DevConfig | ProdConfig:
+def get_settings() -> DevConfig | ProdConfig:
     env = os.environ.get("ENV", "dev")
 
     if env == "dev":

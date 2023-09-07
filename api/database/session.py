@@ -1,9 +1,9 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from ..config import get_config
+from ..settings import get_settings
 
-config = get_config()
+config = get_settings()
 
 engine = create_engine(str(config.db.url), echo=True)
 

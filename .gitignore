@@ -2,7 +2,7 @@
 
 .vscode
 
-/backend/*.pyc
+*.pyc
 
 /frontend/node_modules
 /frontend/npm-debug.log*

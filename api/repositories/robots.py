@@ -1,19 +1,21 @@
 import uuid
+from typing import Tuple
+from sqlalchemy import select, Select
 from sqlalchemy.orm import Session
 
 from .. import models, schemas
 
 
 def create(db: Session, robot_create: schemas.RobotCreate) -> models.Robot:
-    inst = models.Robot(name=robot_create.name)
+    inst = models.Robot(**robot_create.model_dump())
     db.add(inst)
     db.commit()
     db.refresh(inst)
     return inst
 
 
-def all(db: Session, offset: int = 0, limit: int = 100) -> list[models.Robot]:
-    return db.query(models.Robot).offset(offset).limit(limit).all()
+def all() -> Select[Tuple[models.Robot]]:
+    return select(models.Robot).order_by(models.Robot.created_at)
 
 
 def one(db: Session, robot_id: uuid.UUID) -> models.Robot | None:
