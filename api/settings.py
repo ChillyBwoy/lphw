@@ -6,6 +6,13 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic.networks import PostgresDsn
 
 
+class ServerSettings(BaseSettings):
+    allow_origins: list[str] = ["http://localhost:5173"]
+    allow_credentials: bool = True
+    allow_methods: list[str] = ["*"]
+    allow_headers: list[str] = ["*"]
+
+
 class DatabaseConfig(BaseSettings):
     database: Optional[str] = None
     username: Optional[str] = None
@@ -29,6 +36,7 @@ class DatabaseConfig(BaseSettings):
 
 class BaseConfig(BaseSettings):
     db: DatabaseConfig = DatabaseConfig()
+    server: ServerSettings = ServerSettings()
 
     model_config = SettingsConfigDict(env_nested_delimiter="_")
 
