@@ -84,14 +84,12 @@ export const getQueryString = (params: Record<string, any>): string => {
 const getUrl = (config: OpenAPIConfig, options: ApiRequestOptions): string => {
   const encoder = config.ENCODE_PATH || encodeURI;
 
-  const path = options.url
-    .replace("{api-version}", config.VERSION)
-    .replace(/{(.*?)}/g, (substring: string, group: string) => {
-      if (options.path?.hasOwnProperty(group)) {
-        return encoder(String(options.path[group]));
-      }
-      return substring;
-    });
+  const path = options.url.replace("{api-version}", config.VERSION).replace(/{(.*?)}/g, (substring: string, group: string) => {
+    if (options.path?.hasOwnProperty(group)) {
+      return encoder(String(options.path[group]));
+    }
+    return substring;
+  });
 
   const url = `${config.BASE}${path}`;
   if (options.query) {
@@ -278,11 +276,7 @@ export const catchErrorCodes = (options: ApiRequestOptions, result: ApiResult): 
       }
     })();
 
-    throw new ApiError(
-      options,
-      result,
-      `Generic Error: status: ${errorStatus}; status text: ${errorStatusText}; body: ${errorBody}`,
-    );
+    throw new ApiError(options, result, `Generic Error: status: ${errorStatus}; status text: ${errorStatusText}; body: ${errorBody}`);
   }
 };
 

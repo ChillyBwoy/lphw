@@ -16,7 +16,9 @@ const props = defineProps<{
 </template>
 
 <style scoped>
-.robot-list {}
+.robot-list {
+}
 
-.robot-list__item {}
+.robot-list__item {
+}
 </style>

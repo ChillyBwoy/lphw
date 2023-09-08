@@ -1,27 +1,23 @@
 <script setup lang="ts">
-import { ApiClient } from "@/client";
+import { inject } from "vue";
+
 import { useFetchData } from "@/hooks/useFetchData";
-
+import { apiClientInjectKey } from "@/constants/injection";
 import RobotList from "@/components/RobotList.vue";
+import SuspendStatus from "@/components/SuspendStatus.vue";
 
-const apiClient = new ApiClient({
-  BASE: "http://localhost:8000",
-});
+const apiClient = inject(apiClientInjectKey)!;
 
-const fetchRobots = () =>
-  apiClient.robots.list({
-    size: 10,
-  });
-
-const [$robotsData, $robotsStatus] = useFetchData(fetchRobots, true);
+const [$robotsData, $robotsStatus] = useFetchData(apiClient.robots.list({}));
 </script>
 
 <template>
-  <h1>Robots</h1>
-
-  <div v-if="$robotsStatus === 'loading'">Loading...</div>
-  <div v-if="$robotsStatus === 'error'">Error</div>
-  <div v-if="$robotsStatus === 'success' && $robotsData">
-    <RobotList :robots="$robotsData.items" />
-  </div>
+  <h1>Robot List</h1>
+  <SuspendStatus :status="$robotsStatus">
+    <template #loading>Loading...</template>
+    <template #error>Error</template>
+    <template #success>
+      <RobotList :robots="$robotsData.items" />
+    </template>
+  </SuspendStatus>
 </template>

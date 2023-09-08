@@ -6,7 +6,9 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="robot-list-item">{{ props.robot.name }}</div>
+  <div class="robot-list-item">
+    <a :href="`/robots/show/${robot.id}`">{{ props.robot.name }}</a>
+  </div>
 </template>
 
 <style scoped>
