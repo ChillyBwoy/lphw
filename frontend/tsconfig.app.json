@@ -9,6 +9,11 @@
     "src/**/__tests__/*"
   ],
   "compilerOptions": {
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
     "composite": true,
     "strict": true,
     "strictNullChecks": true,

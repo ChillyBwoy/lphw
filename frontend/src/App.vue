@@ -5,8 +5,11 @@ import { RouterLink, RouterView } from "vue-router";
 <template>
   <header>
     <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/robots">Robots</RouterLink>
+      <ul>
+        <li><RouterLink to="/">Home</RouterLink></li>
+        <li><RouterLink to="/robots">Robots</RouterLink></li>
+        <li><RouterLink to="/robots/create">Add Robot</RouterLink></li>
+      </ul>
     </nav>
   </header>
 
