@@ -66,12 +66,12 @@ export class RobotsService {
    * @returns Robot Successful Response
    * @throws ApiError
    */
-  public show({ robotId }: { robotId: string }): CancelablePromise<Robot> {
+  public show({ id }: { id: string }): CancelablePromise<Robot> {
     return this.httpRequest.request({
       method: "GET",
       url: "/api/v1/robots/{id}",
-      query: {
-        robot_id: robotId,
+      path: {
+        id: id,
       },
       errors: {
         422: `Validation Error`,
@@ -104,12 +104,12 @@ export class RobotsService {
    * @returns void
    * @throws ApiError
    */
-  public destroy({ robotId }: { robotId: string }): CancelablePromise<void> {
+  public destroy({ id }: { id: string }): CancelablePromise<void> {
     return this.httpRequest.request({
       method: "DELETE",
       url: "/api/v1/robots/{id}",
-      query: {
-        robot_id: robotId,
+      path: {
+        id: id,
       },
       errors: {
         422: `Validation Error`,

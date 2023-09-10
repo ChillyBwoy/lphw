@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { inject } from "vue";
-
 import { useFetchData } from "@/hooks/useFetchData";
-import { apiClientInjectKey } from "@/constants/injection";
+import { useApiClient } from "@/hooks/useApiClient";
 import RobotList from "@/components/RobotList.vue";
 import SuspendStatus from "@/components/SuspendStatus.vue";
 
-const apiClient = inject(apiClientInjectKey)!;
+const apiClient = useApiClient();
 
 const [$robotsData, $robotsStatus] = useFetchData(apiClient.robots.list({}));
 </script>
