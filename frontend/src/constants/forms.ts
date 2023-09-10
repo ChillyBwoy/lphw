@@ -4,6 +4,7 @@ type RobotFormTextProps = {
   [key in keyof Robot]: {
     title: string;
     placeholder?: string;
+    type?: "text" | "number" | "password" | "email";
   };
 };
 

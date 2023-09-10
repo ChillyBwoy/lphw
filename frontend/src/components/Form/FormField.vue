@@ -5,10 +5,11 @@ const props = defineProps<{
   type: string;
   name: string;
   placeholder?: string;
-  modelValue: string | number | boolean | undefined;
+  required?: boolean;
+  modelValue: string | number | undefined;
 }>();
 
-const emit = defineEmits<(e: "update:modelValue", value: string | number | boolean | undefined) => void>();
+const emit = defineEmits<(e: "update:modelValue", value: string | number | undefined) => void>();
 
 const localValue = computed({
   get() {
@@ -22,14 +23,17 @@ const localValue = computed({
 
 <template>
   <div class="form-field">
-    <input type="text" :name="props.name" :placeholder="props.placeholder" v-model="localValue" />
+    <input
+      :type="props.type"
+      :name="props.name"
+      :placeholder="props.placeholder"
+      :required="props.required"
+      v-model="localValue"
+    />
   </div>
 </template>
 
 <style scoped>
-.form-field {
-}
-
 .form-field input {
   width: 100%;
   padding: 0 0.5rem;
