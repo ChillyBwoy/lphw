@@ -19,8 +19,8 @@ async def list(db: Session = Depends(get_db)):
 
 
 @router.get("/{id}", response_model=schemas.Robot)
-async def show(robot_id: uuid.UUID, db: Session = Depends(get_db)):
-    return repo.one(db, robot_id=robot_id)
+async def show(id: uuid.UUID, db: Session = Depends(get_db)):
+    return repo.one(db, robot_id=id)
 
 
 @router.post("/", response_model=schemas.Robot)
@@ -42,11 +42,11 @@ async def update(robot_id: uuid.UUID, robot: schemas.RobotUpdate, db: Session = 
 
 
 @router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
-async def destroy(robot_id: uuid.UUID, db: Session = Depends(get_db)):
-    db_robot = repo.one(db, robot_id=robot_id)
+async def destroy(id: uuid.UUID, db: Session = Depends(get_db)):
+    db_robot = repo.one(db, robot_id=id)
     if not db_robot:
         raise HTTPException(status_code=404, detail="Robot not found")
 
-    repo.destroy(db, robot_id=robot_id)
+    repo.destroy(db, robot_id=id)
 
     return {"ok": True}
