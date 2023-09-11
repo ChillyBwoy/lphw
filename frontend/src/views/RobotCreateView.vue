@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import type { RobotCreate } from "@/client";
-import RobotCreateForm from "@/components/RobotCreateForm.vue";
-import { useApiClient } from "@/hooks/useApiClient";
-import { useFetchDataFunc } from "@/hooks/useFetchDataFunc";
 import { watch } from "vue";
 import { useRouter } from "vue-router";
+import type { RobotCreate } from "@/client";
+import { useApiClient } from "@/hooks/useApiClient";
+import { useFetchDataFunc } from "@/hooks/useFetchDataFunc";
+import { routes } from "@/router/routes";
+import RobotCreateForm from "@/components/RobotCreateForm.vue";
 
 const apiClient = useApiClient();
 const router = useRouter();
@@ -23,8 +24,7 @@ watch(
   () => $createRobotStatus.value,
   (status) => {
     if (status === "success" && $createRobotData.value) {
-      const nextUrl = `/robots/show/${$createRobotData.value.id}`;
-      router.push(nextUrl);
+      router.push(routes.robot($createRobotData.value.id));
     }
   },
 );

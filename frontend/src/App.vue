@@ -1,19 +1,11 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
+import { RouterView } from "vue-router";
+
+import AppLayout from "./components/AppLayout.vue";
 </script>
 
 <template>
-  <header>
-    <nav>
-      <ul>
-        <li><RouterLink to="/">Home</RouterLink></li>
-        <li><RouterLink to="/robots">Robots</RouterLink></li>
-        <li><RouterLink to="/robots/create">Add Robot</RouterLink></li>
-      </ul>
-    </nav>
-  </header>
-
-  <RouterView />
+  <AppLayout>
+    <RouterView />
+  </AppLayout>
 </template>
-
-<style scoped></style>

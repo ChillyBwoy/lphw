@@ -1,31 +1,32 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import { routes } from "@/router/routes";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/",
+      path: routes.home(),
       name: "home",
       component: HomeView,
     },
     {
-      path: "/robots",
+      path: routes.robotList(),
       name: "robotList",
       component: () => import("../views/RobotListView.vue"),
     },
     {
-      path: "/robots/show/:id",
+      path: routes.robot(":id"),
       name: "robot",
       component: () => import("../views/RobotView.vue"),
     },
     {
-      path: "/robots/create",
+      path: routes.robotCreate(),
       name: "robotCreate",
       component: () => import("../views/RobotCreateView.vue"),
     },
     {
-      path: "/robots/:id/edit",
+      path: routes.robotEdit(":id"),
       name: "robotEdit",
       component: () => import("../views/RobotEditView.vue"),
     },
