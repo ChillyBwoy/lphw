@@ -2,6 +2,8 @@
 import { computed, ref } from "vue";
 
 import FormButton from "@/components/Form/FormButton.vue";
+import ChevronLeftIcon from "@heroicons/vue/24/solid/ChevronLeftIcon";
+import ChevronRightIcon from "@heroicons/vue/24/solid/ChevronRightIcon";
 
 const props = defineProps<{
   pageSize: number;
@@ -85,11 +87,18 @@ const nextDisabled = computed(() => {
 .list-pagination__page {
   width: 50px;
 }
+
+.list-pagination__icon {
+  width: var(--icon-size-l);
+  height: var(--icon-size-l);
+}
 </style>
 
 <template>
   <div class="list-pagination">
-    <FormButton @click="handleClickPrev" :disabled="prevDisabled">prev</FormButton>
+    <FormButton @click="handleClickPrev" :disabled="prevDisabled">
+      <ChevronLeftIcon class="list-pagination__icon" />
+    </FormButton>
     <ul>
       <li v-if="hasLeftEllipsis">
         <FormButton class="list-pagination__page" disabled>...</FormButton>
@@ -103,6 +112,8 @@ const nextDisabled = computed(() => {
         <FormButton class="list-pagination__page" disabled>...</FormButton>
       </li>
     </ul>
-    <FormButton @click="handleClickNext" :disabled="nextDisabled">next</FormButton>
+    <FormButton @click="handleClickNext" :disabled="nextDisabled">
+      <ChevronRightIcon class="list-pagination__icon" />
+    </FormButton>
   </div>
 </template>
