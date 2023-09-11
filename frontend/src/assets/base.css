@@ -51,7 +51,6 @@
   --color-alert: #dd0000;
 }
 
-
 @media (min-width: 768px) {
   :root {
     --font-size-xs: 0.75rem;
@@ -78,7 +77,8 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {}
+  :root {
+  }
 }
 
 body {

@@ -21,7 +21,18 @@ export const $RobotUpdate = {
       isRequired: true,
     },
     ip_address: {
-      type: "string",
+      type: "any-of",
+      contains: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    system_status: {
+      type: "RobotStatus",
       isRequired: true,
     },
   },

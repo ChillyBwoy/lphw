@@ -22,7 +22,10 @@ const props = defineProps<{
     <div class="robot-list-item__status">
       <RobotStatus :status="robot.system_status" />
     </div>
-    <BatteryStatus :value="robot.remaining_battery" />
+    <div class="robot-list-item__battery">
+      <BatteryStatus :value="robot.remaining_battery" />
+      <BatteryStatus :value="robot.battery_health" />
+    </div>
   </div>
 </template>
 
@@ -53,5 +56,13 @@ const props = defineProps<{
   display: -webkit-box;
   white-space: normal;
   overflow: hidden;
+}
+
+.robot-list-item__battery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--grid-gap-1);
 }
 </style>

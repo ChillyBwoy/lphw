@@ -21,7 +21,19 @@ export const $Robot = {
       isRequired: true,
     },
     ip_address: {
-      type: "string",
+      type: "any-of",
+      contains: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      isRequired: true,
+    },
+    system_status: {
+      type: "RobotStatus",
       isRequired: true,
     },
     id: {
@@ -46,16 +58,6 @@ export const $Robot = {
     },
     remaining_battery: {
       type: "number",
-      isReadOnly: true,
-      isRequired: true,
-    },
-    system_status: {
-      type: "all-of",
-      contains: [
-        {
-          type: "RobotStatus",
-        },
-      ],
       isReadOnly: true,
       isRequired: true,
     },

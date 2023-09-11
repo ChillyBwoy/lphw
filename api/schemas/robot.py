@@ -54,7 +54,7 @@ class Robot(RobotBase):
     @computed_field
     @property
     def battery_health(self) -> int:
-        return 42
+        return 85
 
     @computed_field
     @property

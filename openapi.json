@@ -328,8 +328,18 @@
             "title": "Serial Number"
           },
           "ip_address": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Ip Address"
+          },
+          "system_status": {
+            "$ref": "#/components/schemas/RobotStatus"
           },
           "id": {
             "type": "string",
@@ -356,14 +366,6 @@
             "title": "Remaining Battery",
             "readOnly": true
           },
-          "system_status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/RobotStatus"
-              }
-            ],
-            "readOnly": true
-          },
           "connected": {
             "type": "boolean",
             "title": "Connected",
@@ -377,12 +379,12 @@
           "software_version",
           "serial_number",
           "ip_address",
+          "system_status",
           "id",
           "created_at",
           "updated_at",
           "battery_health",
           "remaining_battery",
-          "system_status",
           "connected"
         ],
         "title": "Robot"
@@ -406,8 +408,18 @@
             "title": "Serial Number"
           },
           "ip_address": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Ip Address"
+          },
+          "system_status": {
+            "$ref": "#/components/schemas/RobotStatus"
           }
         },
         "type": "object",
@@ -416,7 +428,7 @@
           "model",
           "software_version",
           "serial_number",
-          "ip_address"
+          "system_status"
         ],
         "title": "RobotCreate"
       },
@@ -450,8 +462,18 @@
             "title": "Serial Number"
           },
           "ip_address": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Ip Address"
+          },
+          "system_status": {
+            "$ref": "#/components/schemas/RobotStatus"
           }
         },
         "type": "object",
@@ -460,7 +482,7 @@
           "model",
           "software_version",
           "serial_number",
-          "ip_address"
+          "system_status"
         ],
         "title": "RobotUpdate"
       },

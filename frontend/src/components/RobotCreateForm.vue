@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import { ref } from "vue";
+import { RobotStatus, type RobotCreate } from "@/client";
 import FormField from "@/components/Form/FormField.vue";
 import FormFieldWrapper from "@/components/Form/FormFieldWrapper.vue";
 import FormButton from "@/components/Form/FormButton.vue";
-import type { RobotCreate } from "@/client";
+import FormSelect from "@/components/Form/FormSelect.vue";
 
 type RobotCreateErrors = Partial<Record<keyof RobotCreate, Array<{ type: string; message: string }>>>;
 
@@ -16,6 +17,7 @@ const $model = ref("");
 const $serial_number = ref("");
 const $software_version = ref("");
 const $ip_address = ref("");
+const $system_status = ref(RobotStatus.IDLE);
 
 const emit = defineEmits<{
   (e: "submit", robot: RobotCreate): void;
@@ -29,6 +31,7 @@ const handleSubmit = (event: Event) => {
     serial_number: $serial_number.value,
     software_version: $software_version.value,
     ip_address: $ip_address.value,
+    system_status: $system_status.value,
   });
 };
 </script>
@@ -55,6 +58,11 @@ const handleSubmit = (event: Event) => {
     </FormFieldWrapper>
     <FormFieldWrapper title="IP Address" :errors="props.errors?.ip_address">
       <FormField name="ip_address" type="text" placeholder="" v-model="$ip_address" />
+    </FormFieldWrapper>
+    <FormFieldWrapper title="System Status" :errors="props.errors?.system_status">
+      <FormSelect name="system_status" v-model="$system_status">
+        <option v-for="status in RobotStatus" :key="status" :value="status">{{ status }}</option>
+      </FormSelect>
     </FormFieldWrapper>
     <div>
       <FormButton fullWidth size="l" type="submit">Add</FormButton>
