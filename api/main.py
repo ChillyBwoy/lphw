@@ -1,8 +1,12 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, status
 from fastapi.routing import APIRoute
+from fastapi.responses import JSONResponse
+from fastapi.encoders import jsonable_encoder
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi_pagination import add_pagination
 
+from .exceptions import map_validation_error
 from .endpoints import robots
 from .settings import get_settings
 
@@ -21,6 +25,18 @@ app.add_middleware(
     allow_methods=config.server.allow_methods,
     allow_headers=config.server.allow_headers,
 )
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(_request: Request, exc: RequestValidationError):
+    errors = map_validation_error(exc)
+
+    return JSONResponse(
+        status_code=status.HTTP_400_BAD_REQUEST,
+        content=jsonable_encoder({"errors": errors}),
+    )
+
+
 app.include_router(robots.router, prefix="/api/v1")
 
 add_pagination(app)

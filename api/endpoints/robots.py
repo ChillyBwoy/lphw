@@ -1,6 +1,7 @@
 import uuid
 from sqlalchemy import select
 from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.exceptions import RequestValidationError
 from fastapi_pagination import Page
 from fastapi_pagination.ext.sqlalchemy import paginate  # type: ignore
 from sqlalchemy.orm import Session
@@ -27,8 +28,15 @@ async def show(id: uuid.UUID, db: Session = Depends(get_db)):
 async def create(robot: schemas.RobotCreate, db: Session = Depends(get_db)):
     db_robot = repo.get_by_serial_number(db, serial_number=robot.serial_number)
     if db_robot:
-        raise HTTPException(status_code=400, detail="Robot with this serial number already exists")
-
+        raise RequestValidationError(
+            errors=[
+                {
+                    "type": "integrity_error",
+                    "loc": ["body", "serial_number"],
+                    "msg": "Robot with this serial number already exists",
+                }
+            ]
+        )
     return repo.create(db, robot_create=robot)
 
 
@@ -36,7 +44,7 @@ async def create(robot: schemas.RobotCreate, db: Session = Depends(get_db)):
 async def update(robot_id: uuid.UUID, robot: schemas.RobotUpdate, db: Session = Depends(get_db)):
     db_robot = repo.one(db, robot_id=robot_id)
     if not db_robot:
-        raise HTTPException(status_code=404, detail="Robot not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Robot not found")
 
     return repo.update(db, robot=db_robot, robot_update=robot)
 
@@ -45,7 +53,7 @@ async def update(robot_id: uuid.UUID, robot: schemas.RobotUpdate, db: Session = 
 async def destroy(id: uuid.UUID, db: Session = Depends(get_db)):
     db_robot = repo.one(db, robot_id=id)
     if not db_robot:
-        raise HTTPException(status_code=404, detail="Robot not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Robot not found")
 
     repo.destroy(db, robot_id=id)
 

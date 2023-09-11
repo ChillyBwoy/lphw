@@ -40,7 +40,6 @@ const localValue = computed({
   border: 1px solid var(--color-border);
   border-radius: 0.25rem;
   height: 2.5rem;
-  font-size: 0.8rem;
 }
 
 .form-field input:focus {

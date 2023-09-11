@@ -33,5 +33,5 @@ watch(
 <template>
   <h1>Robot Create</h1>
 
-  <RobotCreateForm @submit="handleSubmit" />
+  <RobotCreateForm @submit="handleSubmit" :errors="$createRobotError?.body.errors" />
 </template>

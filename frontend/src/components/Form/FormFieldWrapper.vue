@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 const props = defineProps<{
   title?: string;
+  errors?: Array<{ message: string }>;
 }>();
 </script>
 
@@ -11,6 +12,11 @@ const props = defineProps<{
     </template>
     <div class="form-field-wrapper__body">
       <slot></slot>
+      <ul v-if="props.errors && props.errors.length > 0" class="form-field-wrapper__errorlist">
+        <li v-for="error in props.errors" :key="error.message" class="form-field-wrapper__errorlist__item">
+          {{ error.message }}
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -24,9 +30,18 @@ const props = defineProps<{
 }
 
 .form-field-wrapper__title {
-  font-size: 0.8rem;
 }
 
 .form-field-wrapper__body {
+}
+
+.form-field-wrapper__errorlist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.form-field-wrapper__errorlist__item {
+  color: red;
 }
 </style>
