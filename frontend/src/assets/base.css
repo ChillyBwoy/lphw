@@ -1,26 +1,37 @@
 :root {
-  --font-size-xs: 0.5rem;
-  --font-size-s: 0.75rem;
-  --font-size-m: 1rem;
-  --font-size-l: 1.25rem;
-  --font-size-xl: 2rem;
+  --media-sm: 640px;
+  --media-md: 768px;
+  --media-lg: 1024px;
+  --media-xl: 1280px;
+}
 
+:root {
+  --font-size-xs: 0.6rem;
+  --font-size-s: 0.7rem;
+  --font-size-m: 0.8rem;
+  --font-size-l: 1rem;
+  --font-size-xl: 1.5rem;
+
+  --grid-gap-05: 0.25rem;
   --grid-gap-1: 0.5rem;
-  --grid-gap-2: 1rem;
-  --grid-gap-3: 2rem;
-  --grid-gap-4: 3rem;
-  --grid-gap-5: 5rem;
+  --grid-gap-2: 0.9rem;
+  --grid-gap-3: 1rem;
+  --grid-gap-4: 2rem;
+  --grid-gap-5: 3rem;
+  --grid-gap-6: 4rem;
 
-  --icon-size-s: 1rem;
-  --icon-size-m: 1.25rem;
-  --icon-size-l: 1.5rem;
-  --icon-size-xl: 2rem;
+  --icon-size-s: 0.5rem;
+  --icon-size-m: 0.75rem;
+  --icon-size-l: 1rem;
+  --icon-size-xl: 1.25rem;
 
-  --header-bg: #ffffff;
+  --border-radius-1: 0.25rem;
+  --border-radius-2: 0.5rem;
 
-  --color-white: #ffffff;
-  --color-gray: #cccccc;
+  --layout-gap: 1rem;
+}
 
+:root {
   --color-bg-main: #ffffff;
   --color-bg-secondary: #cccccc;
 
@@ -30,10 +41,41 @@
 
   --color-link: #27aae1;
 
-  --border-radius-1: 0.25rem;
-  --border-radius-2: 0.5rem;
+  --color-border-main: #cccccc;
+  --color-border-secondary: #3f4f5e;
+
+  --color-white: #ffffff;
+  --color-gray: #cccccc;
+  --color-success: #00dd00;
+  --color-warn: #ffdd00;
+  --color-alert: #dd0000;
 }
 
+
+@media (min-width: 768px) {
+  :root {
+    --font-size-xs: 0.75rem;
+    --font-size-s: 0.8rem;
+    --font-size-m: 1rem;
+    --font-size-l: 1.25rem;
+    --font-size-xl: 2rem;
+
+    --grid-gap-05: 0.25rem;
+    --grid-gap-1: 0.5rem;
+    --grid-gap-2: 1rem;
+    --grid-gap-3: 2rem;
+    --grid-gap-4: 3rem;
+    --grid-gap-5: 5rem;
+    --grid-gap-6: 8rem;
+
+    --icon-size-s: 1rem;
+    --icon-size-m: 1.25rem;
+    --icon-size-l: 1.5rem;
+    --icon-size-xl: 2rem;
+
+    --layout-gap: 6rem;
+  }
+}
 
 @media (prefers-color-scheme: dark) {
   :root {}
@@ -47,7 +89,7 @@ body {
     background-color 0.5s;
   line-height: 1.6;
 
-  font-size: var(--font-size-m);
+  font-size: 100%;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

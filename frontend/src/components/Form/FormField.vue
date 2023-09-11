@@ -7,6 +7,7 @@ const props = defineProps<{
   placeholder?: string;
   required?: boolean;
   modelValue: string | number | undefined;
+  error?: boolean;
 }>();
 
 const emit = defineEmits<(e: "update:modelValue", value: string | number | undefined) => void>();
@@ -22,7 +23,7 @@ const localValue = computed({
 </script>
 
 <template>
-  <div class="form-field">
+  <div class="form-field" :class="{ 'form-field_error': props.error }">
     <input
       :type="props.type"
       :name="props.name"
@@ -36,14 +37,20 @@ const localValue = computed({
 <style scoped>
 .form-field input {
   width: 100%;
-  padding: 0 0.5rem;
-  border: 1px solid var(--color-border);
+  box-sizing: border-box;
+  padding: 0 var(--grid-gap-1);
+  border: 1px solid var(--color-border-main);
   border-radius: 0.25rem;
   height: 2.5rem;
 }
 
 .form-field input:focus {
   outline: none;
-  border: 1px solid var(--color-text);
+  border: 1px solid var(--color-border-secondary);
+}
+
+.form-field_error input {
+  border: 1px solid var(--color-alert);
+  color: var(--color-alert);
 }
 </style>

@@ -6,7 +6,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="form-field-wrapper">
+  <div class="form-field-wrapper" :class="{ 'form-field-wrapper_error': props.errors && props.errors.length > 0 }">
     <template v-if="props.title">
       <label class="form-field-wrapper__title">{{ props.title }}</label>
     </template>
@@ -26,13 +26,21 @@ const props = defineProps<{
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+}
+
+.form-field-wrapper_error {
+  color: var(--color-alert);
 }
 
 .form-field-wrapper__title {
+  font-size: var(--font-size-l);
+  font-weight: 500;
 }
 
 .form-field-wrapper__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--grid-gap-1);
 }
 
 .form-field-wrapper__errorlist {
@@ -42,6 +50,7 @@ const props = defineProps<{
 }
 
 .form-field-wrapper__errorlist__item {
-  color: red;
+  font-size: var(--font-size-s);
+  color: var(--color-alert);
 }
 </style>

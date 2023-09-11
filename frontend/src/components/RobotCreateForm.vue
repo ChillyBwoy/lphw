@@ -36,7 +36,13 @@ const handleSubmit = (event: Event) => {
 <template>
   <form action="" @submit="handleSubmit" class="robot-create-form">
     <FormFieldWrapper title="Name" :errors="props.errors?.name">
-      <FormField name="name" type="text" placeholder="Robot Name" v-model="$name" />
+      <FormField
+        name="name"
+        type="text"
+        placeholder="Robot Name"
+        v-model="$name"
+        :error="Boolean(props.errors?.name)"
+      />
     </FormFieldWrapper>
     <FormFieldWrapper title="Model" :errors="props.errors?.model">
       <FormField name="model" type="text" placeholder="" v-model="$model" />
@@ -44,14 +50,14 @@ const handleSubmit = (event: Event) => {
     <FormFieldWrapper title="Serial Number" :errors="props.errors?.serial_number">
       <FormField name="serial_number" type="text" placeholder="" v-model="$serial_number" />
     </FormFieldWrapper>
-    <FormFieldWrapper title="Software Versio" :errors="props.errors?.software_version">
+    <FormFieldWrapper title="Software Version" :errors="props.errors?.software_version">
       <FormField name="software_version" type="text" placeholder="" v-model="$software_version" />
     </FormFieldWrapper>
     <FormFieldWrapper title="IP Address" :errors="props.errors?.ip_address">
       <FormField name="ip_address" type="text" placeholder="" v-model="$ip_address" />
     </FormFieldWrapper>
     <div>
-      <FormButton type="submit">Add</FormButton>
+      <FormButton fullWidth size="l" type="submit">Add</FormButton>
     </div>
   </form>
 </template>
@@ -60,9 +66,6 @@ const handleSubmit = (event: Event) => {
 .robot-create-form {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-
-  box-sizing: border-box;
-  padding: 2rem;
+  gap: var(--grid-gap-2);
 }
 </style>

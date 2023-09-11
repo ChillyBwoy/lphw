@@ -84,35 +84,29 @@ const nextDisabled = computed(() => {
   gap: var(--grid-gap-1);
 }
 
-.list-pagination__page {
-  width: 50px;
-}
-
 .list-pagination__icon {
-  width: var(--icon-size-l);
-  height: var(--icon-size-l);
+  width: var(--icon-size-m);
+  height: var(--icon-size-m);
 }
 </style>
 
 <template>
   <div class="list-pagination">
-    <FormButton @click="handleClickPrev" :disabled="prevDisabled">
+    <FormButton size="m" @click="handleClickPrev" :disabled="prevDisabled">
       <ChevronLeftIcon class="list-pagination__icon" />
     </FormButton>
     <ul>
       <li v-if="hasLeftEllipsis">
-        <FormButton class="list-pagination__page" disabled>...</FormButton>
+        <FormButton size="l" disabled>...</FormButton>
       </li>
       <li v-for="pageNum in pageRange" :key="pageNum">
-        <FormButton class="list-pagination__page" :active="pageNum === $page" @click="handleClickPage(pageNum)">{{
-          pageNum
-        }}</FormButton>
+        <FormButton size="l" :active="pageNum === $page" @click="handleClickPage(pageNum)">{{ pageNum }}</FormButton>
       </li>
       <li v-if="hasRightEllipsis">
-        <FormButton class="list-pagination__page" disabled>...</FormButton>
+        <FormButton size="l" disabled>...</FormButton>
       </li>
     </ul>
-    <FormButton @click="handleClickNext" :disabled="nextDisabled">
+    <FormButton @click="handleClickNext" size="m" :disabled="nextDisabled">
       <ChevronRightIcon class="list-pagination__icon" />
     </FormButton>
   </div>

@@ -6,6 +6,7 @@ import { useApiClient } from "@/hooks/useApiClient";
 import { useFetchDataFunc } from "@/hooks/useFetchDataFunc";
 import { routes } from "@/router/routes";
 import RobotCreateForm from "@/components/RobotCreateForm.vue";
+import PageTitle from "@/components/PageTitle.vue";
 
 const apiClient = useApiClient();
 const router = useRouter();
@@ -31,7 +32,6 @@ watch(
 </script>
 
 <template>
-  <h1>Robot Create</h1>
-
+  <PageTitle>Robot Create</PageTitle>
   <RobotCreateForm @submit="handleSubmit" :errors="$createRobotError?.body.errors" />
 </template>

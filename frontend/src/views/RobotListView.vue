@@ -5,12 +5,13 @@ import { useFetchDataFunc } from "@/hooks/useFetchDataFunc";
 import RobotList from "@/components/RobotList.vue";
 import SuspendStatus from "@/components/SuspendStatus.vue";
 import ListPagination from "@/components/ListPagination.vue";
+import PageTitle from "@/components/PageTitle.vue";
 
 const apiClient = useApiClient();
 
 const $page = ref(1);
 
-const pageSize = 16;
+const pageSize = 15;
 
 const [fetchRobots, $robotsData, $robotsStatus] = useFetchDataFunc((page: number) => {
   return apiClient.robots.list({
@@ -35,6 +36,7 @@ fetchRobots($page.value);
 </style>
 
 <template>
+  <PageTitle>Robots</PageTitle>
   <SuspendStatus :status="$robotsStatus">
     <template #loading>Loading...</template>
     <template #error>Error</template>
@@ -46,7 +48,7 @@ fetchRobots($page.value);
           :disabled="$robotsStatus === 'loading'"
           :pages="$robotsData.pages"
           :pageSize="pageSize"
-          :offset="2"
+          :offset="1"
           v-model="$page"
         />
       </div>
