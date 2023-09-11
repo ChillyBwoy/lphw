@@ -1,8 +1,10 @@
 import argparse
+import random
 from mimesis import Internet, Development, Transport, Food, Code
 from mimesis.locales import Locale
 
 from api.schemas import RobotCreate
+from api.schemas.robot import RobotStatus
 from api.database.session import SessionLocal
 from api.repositories import robots as robot_repo
 
@@ -28,6 +30,7 @@ def main():
             ip_address=internet.ip_v4(),
             model=transport.car(),
             serial_number=code.imei(),
+            system_status=random.choice(list(RobotStatus)),
         )
 
         robot_repo.create(db, robot_create)

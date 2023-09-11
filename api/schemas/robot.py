@@ -21,6 +21,7 @@ class RobotBase(BaseModel):
     software_version: str
     serial_number: str
     ip_address: Optional[str] = None
+    system_status: RobotStatus
 
     @field_validator("name", "model", "software_version", "serial_number")
     @classmethod
@@ -59,11 +60,6 @@ class Robot(RobotBase):
     @property
     def remaining_battery(self) -> int:
         return 42
-
-    @computed_field
-    @property
-    def system_status(self) -> RobotStatus:
-        return RobotStatus.IDLE
 
     @computed_field
     @property
