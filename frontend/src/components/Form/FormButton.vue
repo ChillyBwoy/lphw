@@ -65,6 +65,10 @@ const buttonClassName = computed(() => {
   border-radius: var(--border-radius-2);
   cursor: pointer;
   color: var(--color-text-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-1);
 }
 
 .form-button:disabled {

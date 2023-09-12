@@ -13,7 +13,7 @@ import AppNavigation from "@/components/AppNavigation.vue";
   justify-content: space-between;
   align-items: center;
   padding: var(--spacing-1);
-  background-color: var(--color-bg-main);
+  background-color: var(--color-bg-primary);
   box-shadow: 0px var(--spacing-1) var(--spacing-2) 0 rgba(0, 0, 0, 0.2);
 }
 

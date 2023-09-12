@@ -17,7 +17,7 @@ const props = defineProps<{
 .page-title__title {
   font-size: var(--font-size-xl);
   font-weight: 500;
-  color: var(--color-text-main);
+  color: var(--color-text-primary);
 }
 
 .page-title__backurl {

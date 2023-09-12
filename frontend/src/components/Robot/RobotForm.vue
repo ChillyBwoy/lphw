@@ -40,6 +40,28 @@ const handleSubmit = (event: Event) => {
 };
 </script>
 
+<style scoped>
+.robot-form {
+  gap: var(--spacing-2);
+  display: flex;
+  flex-direction: column;
+}
+
+.robot-form__actions {
+  display: flex;
+  justify-content: center;
+}
+.robot-form__button {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .robot-form__button {
+    width: auto;
+  }
+}
+</style>
+
 <template>
   <form @submit="handleSubmit" class="robot-form">
     <FormFieldWrapper title="Name" :errors="props.errors?.name">
@@ -68,16 +90,8 @@ const handleSubmit = (event: Event) => {
         <option v-for="status in RobotStatus" :key="status" :value="status">{{ status }}</option>
       </FormSelect>
     </FormFieldWrapper>
-    <div>
-      <FormButton fullWidth size="l" type="submit" :disabled="props.disabled">Add</FormButton>
+    <div class="robot-form__actions">
+      <FormButton class="robot-form__button" size="l" type="submit" :disabled="props.disabled">Save</FormButton>
     </div>
   </form>
 </template>
-
-<style scoped>
-.robot-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2);
-}
-</style>

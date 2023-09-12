@@ -6,6 +6,7 @@ import XCircleIcon from "@heroicons/vue/24/solid/XCircleIcon";
 import ExclamationCircleIcon from "@heroicons/vue/24/solid/ExclamationCircleIcon";
 import PlayCircleIcon from "@heroicons/vue/24/solid/PlayCircleIcon";
 import { RobotStatus } from "@/client/models/RobotStatus";
+import IconContainer from "../IconContainer.vue";
 
 const props = defineProps<{
   status: RobotStatus;
@@ -47,20 +48,13 @@ const color = computed(() => {
 </script>
 
 <style scoped>
-.robot-status {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-05);
-}
 .robot-status svg {
-  width: var(--icon-size-xl);
-  height: var(--icon-size-xl);
   color: v-bind(color);
 }
 </style>
 
 <template>
-  <div class="robot-status" :title="props.status">
+  <IconContainer size="xl" :title="props.status" class="robot-status">
     <Icon />
-  </div>
+  </IconContainer>
 </template>
