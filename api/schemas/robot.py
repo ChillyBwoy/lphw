@@ -4,7 +4,7 @@ import datetime
 from typing import Optional
 from pydantic import field_validator, FieldValidationInfo
 
-from pydantic import BaseModel, computed_field
+from pydantic import BaseModel
 
 
 class RobotStatus(enum.Enum):
@@ -22,6 +22,9 @@ class RobotBase(BaseModel):
     serial_number: str
     ip_address: Optional[str] = None
     system_status: RobotStatus
+    connected: Optional[bool] = False
+    battery_health: Optional[int] = 100
+    remaining_battery: Optional[int] = 100
 
     @field_validator("name", "model", "software_version", "serial_number")
     @classmethod
@@ -50,21 +53,6 @@ class Robot(RobotBase):
     id: uuid.UUID
     created_at: datetime.datetime
     updated_at: datetime.datetime
-
-    @computed_field
-    @property
-    def battery_health(self) -> int:
-        return 85
-
-    @computed_field
-    @property
-    def remaining_battery(self) -> int:
-        return 42
-
-    @computed_field
-    @property
-    def connected(self) -> bool:
-        return True
 
     class Config:
         from_attributes = True

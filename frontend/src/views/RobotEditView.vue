@@ -43,7 +43,7 @@ const handleSubmit = (payload: Partial<Robot>) => {
     <template #loading>Loading...</template>
     <template #error>Error</template>
     <template v-if="$robotData" #success>
-      <PageTitle :backUrl="routes.robot($robotData.id)">Edit {{ $robotData.name }}</PageTitle>
+      <PageTitle :backUrl="routes.robot($robotData.id)">Edit Robot</PageTitle>
       <RobotForm
         @submit="handleSubmit"
         :robot="$robotData"

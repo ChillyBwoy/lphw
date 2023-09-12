@@ -17,52 +17,40 @@ const getColor = (value: number) => {
 <style scoped>
 .robot-battery-status {
   width: 100%;
-  min-height: var(--spacing-3);
   background: var(--color-border-primary);
   border-radius: var(--border-radius-2);
-  position: relative;
   overflow: hidden;
-}
-
-.robot-battery-status__inner {
-  position: absolute;
-  left: 0;
   display: flex;
-  align-items: center;
-  right: 0;
-}
-
-.robot-battery-status__inner:first-child {
-  border-bottom-right-radius: var(--border-radius-2);
-  top: 0;
-  bottom: 50%;
-}
-.robot-battery-status__inner:last-child {
-  border-top-right-radius: var(--border-radius-2);
-  bottom: 0;
-  top: 50%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .robot-battery-status__value {
-  color: var(--color-text-primary);
-  font-size: var(--font-size-xs);
+  flex: 1;
+  color: var(--color-white);
+  font-size: var(--font-size-s);
   padding-left: var(--spacing-1);
+  display: flex;
+  align-items: center;
 }
 </style>
 
 <template>
   <div class="robot-battery-status">
     <div
-      class="robot-battery-status__inner"
+      class="robot-battery-status__value"
+      title="Battery remaining"
       :style="{ backgroundColor: getColor(props.remaining), width: `${props.remaining}%` }"
     >
-      <span class="robot-battery-status__value">{{ props.remaining }}%</span>
+      {{ props.remaining }}%
     </div>
     <div
-      class="robot-battery-status__inner"
+      class="robot-battery-status__value"
+      title="Battery health"
       :style="{ backgroundColor: getColor(props.health), width: `${props.health}%` }"
     >
-      <span class="robot-battery-status__value">{{ props.health }}%</span>
+      {{ props.health }}%
     </div>
   </div>
 </template>

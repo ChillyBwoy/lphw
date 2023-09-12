@@ -31,6 +31,9 @@ def main():
             model=transport.car(),
             serial_number=code.imei(),
             system_status=random.choice(list(RobotStatus)),
+            connected=random.choice([True, False]),
+            battery_health=random.randint(75, 100),
+            remaining_battery=random.randint(5, 100),
         )
 
         robot_repo.create(db, robot_create)

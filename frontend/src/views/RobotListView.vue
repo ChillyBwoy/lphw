@@ -41,7 +41,10 @@ fetchRobots($page.value);
 
 <template>
   <PageTitle>
-    <template #default>Robots</template>
+    <template #default>
+      Robots
+      <template v-if="$robotsData?.total">({{ $robotsData?.total }})</template>
+    </template>
     <template #side>
       <RouterLink :to="routes.robotCreate()" custom v-slot="{ navigate }">
         <FormButton color="secondary" size="l" @click="navigate">

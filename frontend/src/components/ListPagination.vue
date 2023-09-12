@@ -2,9 +2,9 @@
 import { computed, ref } from "vue";
 
 import FormButton from "@/components/Form/FormButton.vue";
-import ChevronLeftIcon from "@heroicons/vue/24/solid/ChevronLeftIcon";
-import ChevronRightIcon from "@heroicons/vue/24/solid/ChevronRightIcon";
-import IconContainer from "./IconContainer.vue";
+import ChevronDoubleLeftIcon from "@heroicons/vue/24/solid/ChevronDoubleLeftIcon";
+import ChevronDoubleRightIcon from "@heroicons/vue/24/solid/ChevronDoubleRightIcon";
+import IconContainer from "@/components/IconContainer.vue";
 
 const props = defineProps<{
   pageSize: number;
@@ -33,45 +33,17 @@ const pageRange = computed(() => {
   return result;
 });
 
-const hasLeftEllipsis = computed(() => {
+const hasGoToFirstButton = computed(() => {
   return pageRange.value[0] > 1;
 });
 
-const hasRightEllipsis = computed(() => {
+const hasGoToLastButton = computed(() => {
   return pageRange.value[pageRange.value.length - 1] < props.pages;
 });
 
 const handleClickPage = (page: number) => {
   emit("update:modelValue", page);
 };
-
-const handleClickPrev = () => {
-  if ($page.value > 1) {
-    emit("update:modelValue", $page.value - 1);
-  }
-};
-
-const handleClickNext = () => {
-  if ($page.value < props.pages) {
-    emit("update:modelValue", $page.value + 1);
-  }
-};
-
-const prevDisabled = computed(() => {
-  if (props.disabled) {
-    return true;
-  }
-
-  return $page.value <= 1;
-});
-
-const nextDisabled = computed(() => {
-  if (props.disabled) {
-    return true;
-  }
-
-  return $page.value >= props.pages;
-});
 </script>
 
 <style scoped>
@@ -88,28 +60,26 @@ const nextDisabled = computed(() => {
 
 <template>
   <div class="list-pagination">
-    <FormButton size="m" @click="handleClickPrev" :disabled="prevDisabled">
-      <IconContainer>
-        <ChevronLeftIcon />
-      </IconContainer>
-    </FormButton>
     <ul>
-      <li v-if="hasLeftEllipsis">
-        <FormButton size="l" disabled>...</FormButton>
+      <li v-if="hasGoToFirstButton">
+        <FormButton size="l" @click="handleClickPage(1)">
+          <IconContainer>
+            <ChevronDoubleLeftIcon />
+          </IconContainer>
+        </FormButton>
       </li>
       <li v-for="pageNum in pageRange" :key="pageNum">
         <FormButton size="l" :color="pageNum === $page ? 'secondary' : 'primary'" @click="handleClickPage(pageNum)">{{
           pageNum
         }}</FormButton>
       </li>
-      <li v-if="hasRightEllipsis">
-        <FormButton size="l" disabled>...</FormButton>
+      <li v-if="hasGoToLastButton">
+        <FormButton size="l" @click="handleClickPage(props.pages)">
+          <IconContainer>
+            <ChevronDoubleRightIcon />
+          </IconContainer>
+        </FormButton>
       </li>
     </ul>
-    <FormButton @click="handleClickNext" size="m" :disabled="nextDisabled">
-      <IconContainer>
-        <ChevronRightIcon />
-      </IconContainer>
-    </FormButton>
   </div>
 </template>

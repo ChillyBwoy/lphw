@@ -4,6 +4,7 @@ import { routes } from "@/router/routes";
 import type { Robot } from "@/client";
 import RobotBatteryStatus from "@/components/Robot/RobotBatteryStatus.vue";
 import RobotStatus from "@/components/Robot/RobotStatus.vue";
+import RobotConnected from "@/components/Robot/RobotConnected.vue";
 
 const props = defineProps<{
   robot: Robot;
@@ -12,17 +13,23 @@ const props = defineProps<{
 
 <template>
   <div class="robot-list-item">
-    <RobotStatus :status="robot.system_status" />
+    <div class="robot-list-item__status">
+      <RobotConnected :connected="Boolean(props.robot.connected)" />
+    </div>
+    <div class="robot-list-item__status">
+      <RobotStatus :status="robot.system_status" />
+    </div>
     <div class="robot-list-item__name">
       <RouterLink :to="routes.robot(robot.id)" class="robot-list-item__link">
-        {{ props.robot.name }}{{ props.robot.name }}
+        {{ props.robot.name }}
       </RouterLink>
     </div>
     <RobotBatteryStatus
-      class="robot-list-item__battery"
+      v-if="robot.remaining_battery && robot.battery_health"
       :remaining="robot.remaining_battery"
       :health="robot.battery_health"
     />
+    <div v-else>no info</div>
   </div>
 </template>
 
@@ -32,7 +39,7 @@ const props = defineProps<{
   display: grid;
   padding: var(--spacing-1) 0;
   gap: var(--spacing-1);
-  grid-template-columns: auto 1fr 25%;
+  grid-template-columns: auto auto 1fr 25%;
 }
 
 @media (min-width: 768px) {
@@ -41,6 +48,7 @@ const props = defineProps<{
   }
 }
 
+.robot-list-item__status,
 .robot-list-item__name {
   display: flex;
   align-items: center;
@@ -57,13 +65,5 @@ const props = defineProps<{
   display: -webkit-box;
   white-space: normal;
   overflow: hidden;
-}
-
-.robot-list-item__battery {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  gap: var(--spacing-1);
 }
 </style>

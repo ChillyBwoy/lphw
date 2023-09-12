@@ -12,4 +12,7 @@ export type RobotCreate = {
   serial_number: string;
   ip_address?: string | null;
   system_status: RobotStatus;
+  connected?: boolean | null;
+  battery_health?: number | null;
+  remaining_battery?: number | null;
 };

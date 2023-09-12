@@ -341,6 +341,42 @@
           "system_status": {
             "$ref": "#/components/schemas/RobotStatus"
           },
+          "connected": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Connected",
+            "default": false
+          },
+          "battery_health": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Battery Health",
+            "default": 100
+          },
+          "remaining_battery": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remaining Battery",
+            "default": 100
+          },
           "id": {
             "type": "string",
             "format": "uuid",
@@ -355,21 +391,6 @@
             "type": "string",
             "format": "date-time",
             "title": "Updated At"
-          },
-          "battery_health": {
-            "type": "integer",
-            "title": "Battery Health",
-            "readOnly": true
-          },
-          "remaining_battery": {
-            "type": "integer",
-            "title": "Remaining Battery",
-            "readOnly": true
-          },
-          "connected": {
-            "type": "boolean",
-            "title": "Connected",
-            "readOnly": true
           }
         },
         "type": "object",
@@ -380,12 +401,12 @@
           "serial_number",
           "ip_address",
           "system_status",
-          "id",
-          "created_at",
-          "updated_at",
+          "connected",
           "battery_health",
           "remaining_battery",
-          "connected"
+          "id",
+          "created_at",
+          "updated_at"
         ],
         "title": "Robot"
       },
@@ -420,6 +441,42 @@
           },
           "system_status": {
             "$ref": "#/components/schemas/RobotStatus"
+          },
+          "connected": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Connected",
+            "default": false
+          },
+          "battery_health": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Battery Health",
+            "default": 100
+          },
+          "remaining_battery": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remaining Battery",
+            "default": 100
           }
         },
         "type": "object",
@@ -474,6 +531,42 @@
           },
           "system_status": {
             "$ref": "#/components/schemas/RobotStatus"
+          },
+          "connected": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Connected",
+            "default": false
+          },
+          "battery_health": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Battery Health",
+            "default": 100
+          },
+          "remaining_battery": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remaining Battery",
+            "default": 100
           }
         },
         "type": "object",

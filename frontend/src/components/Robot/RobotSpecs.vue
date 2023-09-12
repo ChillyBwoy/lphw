@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import type { Robot } from "@/client";
-import RobotBatteryStatus from "./RobotBatteryStatus.vue";
-import RobotStatus from "./RobotStatus.vue";
+import RobotBatteryStatus from "@/components/Robot/RobotBatteryStatus.vue";
+import RobotStatus from "@/components/Robot/RobotStatus.vue";
+import RobotConnected from "./RobotConnected.vue";
 
 const props = defineProps<{
   robot: Robot;
@@ -31,7 +32,7 @@ const props = defineProps<{
 }
 
 .robot-specs__battery {
-  padding: var(--spacing-2) 0;
+  height: var(--spacing-5);
 }
 </style>
 
@@ -49,18 +50,24 @@ const props = defineProps<{
     <dt>IP Address</dt>
     <dd>{{ props.robot.ip_address }}</dd>
 
+    <dt>Connected</dt>
+    <dd>
+      <RobotConnected :connected="Boolean(props.robot.connected)" />
+    </dd>
+
     <dt>System Status</dt>
     <dd>
       <RobotStatus :status="props.robot.system_status" />
     </dd>
-
-    <dt>Battery</dt>
-    <dd>
-      <RobotBatteryStatus
-        class="robot-specs__battery"
-        :health="props.robot.battery_health"
-        :remaining="props.robot.remaining_battery"
-      />
-    </dd>
+    <template v-if="props.robot.battery_health && props.robot.remaining_battery">
+      <dt>Battery</dt>
+      <dd>
+        <RobotBatteryStatus
+          class="robot-specs__battery"
+          :health="props.robot.battery_health"
+          :remaining="props.robot.remaining_battery"
+        />
+      </dd>
+    </template>
   </dl>
 </template>

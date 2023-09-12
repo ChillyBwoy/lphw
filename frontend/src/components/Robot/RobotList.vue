@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Robot } from "@/client";
-import RobotListItem from "./RobotListItem.vue";
+import RobotListItem from "@/components/Robot/RobotListItem.vue";
 
 const props = defineProps<{
   robots: Array<Robot>;

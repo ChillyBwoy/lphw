@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { onMounted, ref, watch } from "vue";
-import FormButton from "./Form/FormButton.vue";
-import IconContainer from "./IconContainer.vue";
+import FormButton from "@/components/Form/FormButton.vue";
+import IconContainer from "@/components/IconContainer.vue";
 import XMarkIcon from "@heroicons/vue/24/outline/XMarkIcon";
 
 const props = defineProps<{

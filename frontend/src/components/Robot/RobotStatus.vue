@@ -6,7 +6,7 @@ import XCircleIcon from "@heroicons/vue/24/solid/XCircleIcon";
 import ExclamationCircleIcon from "@heroicons/vue/24/solid/ExclamationCircleIcon";
 import PlayCircleIcon from "@heroicons/vue/24/solid/PlayCircleIcon";
 import { RobotStatus } from "@/client/models/RobotStatus";
-import IconContainer from "../IconContainer.vue";
+import IconContainer from "@/components/IconContainer.vue";
 
 const props = defineProps<{
   status: RobotStatus;

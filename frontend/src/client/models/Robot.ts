@@ -12,10 +12,10 @@ export type Robot = {
   serial_number: string;
   ip_address: string | null;
   system_status: RobotStatus;
+  connected: boolean | null;
+  battery_health: number | null;
+  remaining_battery: number | null;
   id: string;
   created_at: string;
   updated_at: string;
-  readonly battery_health: number;
-  readonly remaining_battery: number;
-  readonly connected: boolean;
 };
