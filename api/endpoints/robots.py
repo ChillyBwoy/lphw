@@ -1,4 +1,5 @@
 import uuid
+from typing import Optional
 from sqlalchemy import select
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.exceptions import RequestValidationError
@@ -15,8 +16,19 @@ router = APIRouter(prefix="/robots", tags=["robots"])
 
 
 @router.get("/", response_model=Page[schemas.Robot])
-async def list(db: Session = Depends(get_db)):
-    return paginate(db, select(Robot).order_by(Robot.created_at))
+async def list(
+    system_status: Optional[schemas.RobotStatus] = None, connected: Optional[bool] = None, db: Session = Depends(get_db)
+):
+    query = select(Robot)
+    if system_status:
+        query = query.where(Robot.system_status == system_status)
+
+    if connected is not None:
+        query = query.where(Robot.connected == connected)
+
+    query = query.order_by(Robot.created_at)
+
+    return paginate(db, query.order_by(Robot.created_at))
 
 
 @router.get("/{id}", response_model=schemas.Robot)

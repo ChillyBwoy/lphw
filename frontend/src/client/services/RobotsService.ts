@@ -5,6 +5,7 @@
 import type { Page_Robot_ } from "../models/Page_Robot_";
 import type { Robot } from "../models/Robot";
 import type { RobotCreate } from "../models/RobotCreate";
+import type { RobotStatus } from "../models/RobotStatus";
 import type { RobotUpdate } from "../models/RobotUpdate";
 
 import type { CancelablePromise } from "../core/CancelablePromise";
@@ -19,9 +20,13 @@ export class RobotsService {
    * @throws ApiError
    */
   public list({
+    systemStatus,
+    connected,
     page = 1,
     size = 50,
   }: {
+    systemStatus?: RobotStatus | null;
+    connected?: boolean | null;
     /**
      * Page number
      */
@@ -35,6 +40,8 @@ export class RobotsService {
       method: "GET",
       url: "/api/v1/robots/",
       query: {
+        system_status: systemStatus,
+        connected: connected,
         page: page,
         size: size,
       },

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
+import type { RobotStatus } from "@/client";
 import { routes } from "@/router/routes";
 import PlusIcon from "@heroicons/vue/24/outline/PlusIcon";
 import { useApiClient } from "@/hooks/useApiClient";
@@ -10,6 +11,13 @@ import ListPagination from "@/components/ListPagination.vue";
 import PageTitle from "@/components/PageTitle.vue";
 import RobotList from "@/components/Robot/RobotList.vue";
 import SuspendStatus from "@/components/SuspendStatus.vue";
+import RobotSearchForm, { type RobotSearchFormParams } from "@/components/Robot/RobotSearchForm.vue";
+
+interface RobotSeachParams {
+  page: number;
+  systemStatus?: RobotStatus | null;
+  connected?: boolean;
+}
 
 const apiClient = useApiClient();
 
@@ -17,18 +25,44 @@ const $page = ref(1);
 
 const pageSize = 15;
 
-const [fetchRobots, $robotsData, $robotsStatus] = useFetchDataFunc((page: number) => {
+const $filterModel = ref<Partial<RobotSearchFormParams>>({});
+
+const [fetchRobots, $robotsData, $robotsStatus] = useFetchDataFunc((params: RobotSeachParams) => {
   return apiClient.robots.list({
     size: pageSize,
-    page,
+    page: params.page,
+    systemStatus: params.systemStatus,
+    connected: params.connected,
   });
 });
 
+const doSearch = () => {
+  let connected: boolean | undefined = undefined;
+  if ($filterModel.value.connected === "true") {
+    connected = true;
+  } else if ($filterModel.value.connected === "false") {
+    connected = false;
+  }
+
+  fetchRobots({
+    page: $page.value,
+    systemStatus: $filterModel.value.systemStatus || undefined,
+    connected,
+  });
+};
+watch(
+  () => $filterModel,
+  () => {
+    doSearch();
+  },
+  { deep: true },
+);
+
 watch($page, () => {
-  fetchRobots($page.value);
+  doSearch();
 });
 
-fetchRobots($page.value);
+doSearch();
 </script>
 
 <style scoped>
@@ -36,6 +70,20 @@ fetchRobots($page.value);
   display: flex;
   justify-content: center;
   margin-top: 1rem;
+}
+
+.robot-list-view__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+@media (min-width: 768px) {
+  .robot-list-view__body {
+    display: grid;
+    grid-template-columns: 20% 1fr;
+    gap: var(--spacing-2);
+  }
 }
 </style>
 
@@ -60,16 +108,21 @@ fetchRobots($page.value);
     <template #loading>Loading...</template>
     <template #error>Error</template>
     <template #success v-if="$robotsData">
-      <RobotList :robots="$robotsData.items" />
-      <div class="robot-list-view__pagination">
-        <ListPagination
-          v-if="$robotsData.pages"
-          :disabled="$robotsStatus === 'loading'"
-          :pages="$robotsData.pages"
-          :pageSize="pageSize"
-          :offset="1"
-          v-model="$page"
-        />
+      <div class="robot-list-view__body">
+        <RobotSearchForm v-model="$filterModel" />
+        <div>
+          <RobotList :robots="$robotsData.items" />
+          <div class="robot-list-view__pagination">
+            <ListPagination
+              v-if="$robotsData.pages && $robotsData.pages > 1"
+              :disabled="$robotsStatus === 'loading'"
+              :pages="$robotsData.pages"
+              :pageSize="pageSize"
+              :offset="1"
+              v-model="$page"
+            />
+          </div>
+        </div>
       </div>
     </template>
   </SuspendStatus>
