@@ -1,6 +1,11 @@
 <script lang="ts" setup>
 import { RouterLink } from "vue-router";
 import { routes } from "@/router/routes";
+
+const urls = [
+  { name: "Home", href: routes.home() },
+  { name: "Robots", href: routes.robotList() },
+];
 </script>
 
 <style scoped>
@@ -8,27 +13,38 @@ import { routes } from "@/router/routes";
   display: flex;
   list-style: none;
   padding: 0;
-  gap: var(--spacing-2);
+  gap: var(--spacing-3);
 }
 
 .app-navigation__link {
-  padding: var(--spacing-1);
-  display: block;
-  border-radius: var(--border-radius-2);
-  border: 1px solid var(--color-link);
+  font-size: var(--font-size-l);
+  color: var(--color-link);
+  line-height: 1.5rem;
+  display: inline-block;
+  padding: 0 0.25rem;
+  border-bottom: 1px solid var(--color-link);
 }
 
-.app-navigation__link:hover {
-  background-color: var(--color-link);
-  color: var(--color-white);
+.app-navigation__link_active {
+  color: var(--color-text-secondary);
+  border-bottom: none;
 }
 </style>
 
 <template>
   <nav class="app-navigation">
     <ul>
-      <li><RouterLink :to="routes.home()" class="app-navigation__link">Home</RouterLink></li>
-      <li><RouterLink :to="routes.robotList()" class="app-navigation__link">Robots</RouterLink></li>
+      <li v-for="url in urls" :key="url.name">
+        <RouterLink :to="url.href" custom v-slot="{ href, navigate, isActive }">
+          <a
+            class="app-navigation__link"
+            :class="{ 'app-navigation__link_active': isActive }"
+            :href="href"
+            @click="navigate"
+            >{{ url.name }}</a
+          >
+        </RouterLink>
+      </li>
     </ul>
   </nav>
 </template>

@@ -12,7 +12,8 @@ import AppNavigation from "@/components/AppNavigation.vue";
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-1);
+  padding: 0 var(--spacing-3);
+  height: var(--spacing-5);
   background-color: var(--color-bg-primary);
   box-shadow: 0px var(--spacing-1) var(--spacing-2) 0 rgba(0, 0, 0, 0.2);
 }

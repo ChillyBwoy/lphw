@@ -29,12 +29,12 @@ const handleSubmit = (event: Event) => {
   event.preventDefault();
 
   const payload: Partial<Robot> = {
-    name: $name.value,
-    model: $model.value,
-    serial_number: $serial_number.value,
-    software_version: $software_version.value,
-    ip_address: $ip_address.value,
-    system_status: $system_status.value,
+    name: $name.value || undefined,
+    model: $model.value || undefined,
+    serial_number: $serial_number.value || undefined,
+    software_version: $software_version.value || undefined,
+    ip_address: $ip_address.value || undefined,
+    system_status: $system_status.value || undefined,
   };
   emit("submit", payload);
 };

@@ -5,7 +5,7 @@ const props = withDefaults(
   defineProps<{
     size?: "s" | "m" | "l";
     fullWidth?: boolean;
-    color?: "primary" | "secondary" | "warn" | "success" | "alert";
+    color?: "primary" | "secondary" | "warn" | "success" | "alert" | "transparent";
   }>(),
   {
     color: "primary",
@@ -14,44 +14,25 @@ const props = withDefaults(
 );
 
 const size = computed(() => {
-  switch (props.size) {
-    case "s":
-      return "form-button_s";
-    case "l":
-      return "form-button_l";
-    default:
-      return "form-button_m";
-  }
+  return `form-button_${props.size}`;
 });
 
 const bgColor = computed(() => {
-  switch (props.color) {
-    case "primary":
-      return "var(--color-link)";
-    case "secondary":
-      return "var(--color-text-secondary)";
-    case "warn":
-      return "var(--color-warn)";
-    case "success":
-      return "var(--color-success)";
-    case "alert":
-      return "var(--color-alert)";
-    default:
-      return "var(--color-link)";
-  }
+  return `form-button_color-${props.color}`;
 });
 
 const buttonClassName = computed(() => {
   return {
     "form-button": true,
     "form-button_full": props.fullWidth,
+    [bgColor.value]: true,
     [size.value]: true,
   };
 });
 </script>
 
 <template>
-  <button :class="buttonClassName" :style="{ backgroundColor: bgColor }" v-bind="props">
+  <button :class="buttonClassName" v-bind="props">
     <slot></slot>
   </button>
 </template>
@@ -71,6 +52,10 @@ const buttonClassName = computed(() => {
   gap: var(--spacing-1);
 }
 
+.form-button:focus {
+  outline: none;
+}
+
 .form-button:disabled {
   opacity: 0.5;
   cursor: default;
@@ -87,6 +72,26 @@ const buttonClassName = computed(() => {
 .form-button_l {
   min-width: var(--spacing-4);
   min-height: var(--spacing-4);
+}
+
+.form-button_color-primary {
+  background-color: var(--color-link);
+}
+.form-button_color-secondary {
+  background-color: var(--color-text-secondary);
+}
+.form-button_color-warn {
+  background-color: var(--color-warn);
+}
+.form-button_color-success {
+  background-color: var(--color-success);
+}
+.form-button_color-alert {
+  background-color: var(--color-alert);
+}
+.form-button_color-transparent {
+  background-color: transparent;
+  color: var(--color-text-primary);
 }
 
 .form-button_full {

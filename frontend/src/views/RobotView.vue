@@ -1,23 +1,52 @@
 <script setup lang="ts">
+import { ref, watch } from "vue";
 import { useRoute, RouterLink } from "vue-router";
 import PencilSquareIcon from "@heroicons/vue/24/outline/PencilSquareIcon";
 import TrashIcon from "@heroicons/vue/24/solid/TrashIcon";
+import router from "@/router";
 import { routes } from "@/router/routes";
-import { useFetchData } from "@/hooks/useFetchData";
 import { useApiClient } from "@/hooks/useApiClient";
-import SuspendStatus from "@/components/SuspendStatus.vue";
-import PageTitle from "@/components/PageTitle.vue";
+import { useFetchData } from "@/hooks/useFetchData";
+import { useFetchDataFunc } from "@/hooks/useFetchDataFunc";
 import FormButton from "@/components/Form/FormButton.vue";
-import RobotStatus from "@/components/Robot/RobotStatus.vue";
-import RobotBatteryStatus from "@/components/Robot/RobotBatteryStatus.vue";
 import IconContainer from "@/components/IconContainer.vue";
+import ModalDialog from "@/components/ModalDialog.vue";
+import PageTitle from "@/components/PageTitle.vue";
+import RobotSpecs from "@/components/Robot/RobotSpecs.vue";
+import SuspendStatus from "@/components/SuspendStatus.vue";
 
 const route = useRoute();
 
 const apiClient = useApiClient();
 const id = route.params.id as string;
 
+const $deleteConfirmation = ref(false);
+
 const [$robotData, $robotStatus] = useFetchData(apiClient.robots.show({ id }));
+
+const [deleteRobot, _, $deleteRobotStatus] = useFetchDataFunc(() => apiClient.robots.destroy({ id }));
+
+watch(
+  () => $deleteRobotStatus.value,
+  (status) => {
+    if (status === "success") {
+      router.push(routes.robotList());
+    }
+  },
+);
+
+const handleClickDelete = () => {
+  $deleteConfirmation.value = true;
+};
+
+const handleClickDeleteCancel = () => {
+  $deleteConfirmation.value = false;
+};
+
+const handleClickDeleteConfirm = async () => {
+  await deleteRobot(id);
+  $deleteConfirmation.value = false;
+};
 </script>
 
 <style scoped>
@@ -25,31 +54,6 @@ const [$robotData, $robotStatus] = useFetchData(apiClient.robots.show({ id }));
   display: flex;
   flex-direction: column;
   gap: var(--spacing-4);
-}
-
-.robot-view__spec {
-  flex: 1;
-  width: 100%;
-  display: grid;
-  gap: var(--spacing-2) var(--spacing-3);
-  grid-template-columns: auto 1fr;
-  grid-template-rows: repeat(auto-fill, auto);
-}
-
-.robot-view__spec dt {
-  display: flex;
-  align-items: center;
-}
-
-.robot-view__spec dd {
-  font-size: var(--font-size-l);
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-}
-
-.robot-view__battery {
-  padding: var(--spacing-2) 0;
 }
 
 .robot-view__actions {
@@ -76,33 +80,7 @@ const [$robotData, $robotStatus] = useFetchData(apiClient.robots.show({ id }));
           {{ $robotData.name }}
         </PageTitle>
 
-        <dl class="robot-view__spec">
-          <dt>Model</dt>
-          <dd>{{ $robotData.model }}</dd>
-
-          <dt>Software Version</dt>
-          <dd>{{ $robotData.software_version }}</dd>
-
-          <dt>Serial Number</dt>
-          <dd>{{ $robotData.serial_number }}</dd>
-
-          <dt>IP Address</dt>
-          <dd>{{ $robotData.ip_address }}</dd>
-
-          <dt>System Status</dt>
-          <dd>
-            <RobotStatus :status="$robotData.system_status" />
-          </dd>
-
-          <dt>Battery</dt>
-          <dd>
-            <RobotBatteryStatus
-              class="robot-view__battery"
-              :health="$robotData.battery_health"
-              :remaining="$robotData.remaining_battery"
-            />
-          </dd>
-        </dl>
+        <RobotSpecs :robot="$robotData" />
 
         <div class="robot-view__actions">
           <RouterLink :to="routes.robotEdit($robotData.id)" custom v-slot="{ navigate }">
@@ -113,12 +91,23 @@ const [$robotData, $robotStatus] = useFetchData(apiClient.robots.show({ id }));
               </IconContainer>
             </FormButton>
           </RouterLink>
-          <FormButton color="alert" size="l">
+          <FormButton color="alert" size="l" @click="handleClickDelete">
             Delete
             <IconContainer>
               <TrashIcon />
             </IconContainer>
           </FormButton>
+
+          <ModalDialog v-model="$deleteConfirmation">
+            <template #title>Delete Robot</template>
+            <template #default>
+              <p>Are you sure you want to delete this robot?</p>
+            </template>
+            <template #actions>
+              <FormButton size="l" color="primary" @click="handleClickDeleteCancel">Cancel</FormButton>
+              <FormButton size="l" color="alert" @click="handleClickDeleteConfirm">Delete</FormButton>
+            </template>
+          </ModalDialog>
         </div>
       </template>
     </SuspendStatus>

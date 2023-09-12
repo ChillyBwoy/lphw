@@ -12,7 +12,7 @@ const props = defineProps<{
 
 <template>
   <div class="robot-list-item">
-    <RobotStatus class="robot-list-item__status" :status="robot.system_status" />
+    <RobotStatus :status="robot.system_status" />
     <div class="robot-list-item__name">
       <RouterLink :to="routes.robot(robot.id)" class="robot-list-item__link">
         {{ props.robot.name }}{{ props.robot.name }}
@@ -41,8 +41,7 @@ const props = defineProps<{
   }
 }
 
-.robot-list-item__name,
-.robot-list-item__status {
+.robot-list-item__name {
   display: flex;
   align-items: center;
 }
