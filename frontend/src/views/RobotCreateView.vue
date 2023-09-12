@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { watch } from "vue";
 import { useRouter } from "vue-router";
-import type { RobotCreate } from "@/client";
 import { useApiClient } from "@/hooks/useApiClient";
 import { useFetchDataFunc } from "@/hooks/useFetchDataFunc";
 import { routes } from "@/router/routes";
-import RobotCreateForm from "@/components/RobotCreateForm.vue";
+import RobotForm from "@/components/Robot/RobotForm.vue";
 import PageTitle from "@/components/PageTitle.vue";
+import type { Robot, RobotCreate } from "@/client";
 
 const apiClient = useApiClient();
 const router = useRouter();
@@ -17,10 +17,6 @@ const [createRobot, $createRobotData, $createRobotStatus, $createRobotError] = u
   },
 );
 
-const handleSubmit = (payload: RobotCreate) => {
-  createRobot(payload);
-};
-
 watch(
   () => $createRobotStatus.value,
   (status) => {
@@ -29,9 +25,13 @@ watch(
     }
   },
 );
+
+const handleSubmit = (robot: Partial<Robot>) => {
+  createRobot(robot as RobotCreate);
+};
 </script>
 
 <template>
   <PageTitle>Robot Create</PageTitle>
-  <RobotCreateForm @submit="handleSubmit" :errors="$createRobotError?.body.errors" />
+  <RobotForm @submit="handleSubmit" :errors="$createRobotError?.body.errors" />
 </template>

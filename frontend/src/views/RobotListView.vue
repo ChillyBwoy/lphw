@@ -2,7 +2,7 @@
 import { ref, watch } from "vue";
 import { useApiClient } from "@/hooks/useApiClient";
 import { useFetchDataFunc } from "@/hooks/useFetchDataFunc";
-import RobotList from "@/components/RobotList.vue";
+import RobotList from "@/components/Robot/RobotList.vue";
 import SuspendStatus from "@/components/SuspendStatus.vue";
 import ListPagination from "@/components/ListPagination.vue";
 import PageTitle from "@/components/PageTitle.vue";

@@ -3,7 +3,7 @@ import { RouterLink } from "vue-router";
 import { routes } from "@/router/routes";
 import type { Robot } from "@/client";
 import BatteryStatus from "@/components/BatteryStatus.vue";
-import RobotStatus from "@/components/RobotStatus.vue";
+import RobotStatus from "@/components/Robot/RobotStatus.vue";
 
 const props = defineProps<{
   robot: Robot;

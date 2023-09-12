@@ -1,4 +1,20 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { computed } from "vue";
+
+const props = defineProps<{
+  modelValue: string | null | undefined;
+}>();
+const emit = defineEmits<(e: "update:modelValue", value: string | null | undefined) => void>();
+
+const localValue = computed({
+  get() {
+    return props.modelValue;
+  },
+  set(newValue) {
+    emit("update:modelValue", newValue);
+  },
+});
+</script>
 
 <style scoped>
 .form-select {
@@ -12,7 +28,7 @@
 </style>
 
 <template>
-  <select class="form-select">
+  <select class="form-select" v-model="localValue">
     <slot></slot>
   </select>
 </template>

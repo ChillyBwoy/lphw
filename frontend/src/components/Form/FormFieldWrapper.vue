@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import ExclamationCircleIcon from "@heroicons/vue/24/solid/ExclamationCircleIcon";
+
 const props = defineProps<{
   title?: string;
   errors?: Array<{ message: string }>;
@@ -14,6 +16,7 @@ const props = defineProps<{
       <slot></slot>
       <ul v-if="props.errors && props.errors.length > 0" class="form-field-wrapper__errorlist">
         <li v-for="error in props.errors" :key="error.message" class="form-field-wrapper__errorlist__item">
+          <ExclamationCircleIcon class="form-field-wrapper__errorlist__icon" />
           {{ error.message }}
         </li>
       </ul>
@@ -52,5 +55,12 @@ const props = defineProps<{
 .form-field-wrapper__errorlist__item {
   font-size: var(--font-size-s);
   color: var(--color-alert);
+  display: flex;
+  gap: var(--grid-gap-05);
+}
+
+.form-field-wrapper__errorlist__icon {
+  width: var(--icon-size-m);
+  height: var(--icon-size-m);
 }
 </style>

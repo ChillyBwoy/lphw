@@ -6,11 +6,11 @@ const props = defineProps<{
   name: string;
   placeholder?: string;
   required?: boolean;
-  modelValue: string | number | undefined;
+  modelValue: string | null | undefined;
   error?: boolean;
 }>();
 
-const emit = defineEmits<(e: "update:modelValue", value: string | number | undefined) => void>();
+const emit = defineEmits<(e: "update:modelValue", value: string | null | undefined) => void>();
 
 const localValue = computed({
   get() {

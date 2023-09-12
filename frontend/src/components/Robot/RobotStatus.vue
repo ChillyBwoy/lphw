@@ -11,7 +11,7 @@ const props = defineProps<{
   status: RobotStatus;
 }>();
 
-const icon = computed(() => {
+const Icon = computed(() => {
   switch (props.status) {
     case RobotStatus.PAUSED:
       return PauseCircleIcon;
@@ -60,7 +60,7 @@ const color = computed(() => {
 </style>
 
 <template>
-  <div class="robot-status">
-    <icon />
+  <div class="robot-status" :title="props.status">
+    <Icon />
   </div>
 </template>

@@ -1,43 +1,46 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import { RobotStatus, type RobotCreate } from "@/client";
+import { RobotStatus, type Robot } from "@/client";
 import FormField from "@/components/Form/FormField.vue";
 import FormFieldWrapper from "@/components/Form/FormFieldWrapper.vue";
 import FormButton from "@/components/Form/FormButton.vue";
 import FormSelect from "@/components/Form/FormSelect.vue";
 
-type RobotCreateErrors = Partial<Record<keyof RobotCreate, Array<{ type: string; message: string }>>>;
+type RobotFormErrors = Partial<Record<keyof Robot, Array<{ type: string; message: string }>>>;
 
 const props = defineProps<{
-  errors?: RobotCreateErrors;
+  errors?: RobotFormErrors;
+  robot?: Partial<Robot>;
 }>();
-
-const $name = ref("");
-const $model = ref("");
-const $serial_number = ref("");
-const $software_version = ref("");
-const $ip_address = ref("");
-const $system_status = ref(RobotStatus.IDLE);
 
 const emit = defineEmits<{
-  (e: "submit", robot: RobotCreate): void;
+  (e: "submit", robot: Partial<Robot>): void;
 }>();
+
+const $name = ref(props.robot?.name);
+const $model = ref(props.robot?.model);
+const $serial_number = ref(props.robot?.serial_number);
+const $software_version = ref(props.robot?.software_version);
+const $ip_address = ref(props.robot?.ip_address);
+const $system_status = ref(props.robot?.system_status || RobotStatus.IDLE);
 
 const handleSubmit = (event: Event) => {
   event.preventDefault();
-  emit("submit", {
+
+  const payload: Partial<Robot> = {
     name: $name.value,
     model: $model.value,
     serial_number: $serial_number.value,
     software_version: $software_version.value,
     ip_address: $ip_address.value,
     system_status: $system_status.value,
-  });
+  };
+  emit("submit", payload);
 };
 </script>
 
 <template>
-  <form action="" @submit="handleSubmit" class="robot-create-form">
+  <form @submit="handleSubmit" class="robot-form">
     <FormFieldWrapper title="Name" :errors="props.errors?.name">
       <FormField
         name="name"
@@ -71,7 +74,7 @@ const handleSubmit = (event: Event) => {
 </template>
 
 <style scoped>
-.robot-create-form {
+.robot-form {
   display: flex;
   flex-direction: column;
   gap: var(--grid-gap-2);
