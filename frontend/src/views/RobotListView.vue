@@ -41,7 +41,7 @@ fetchRobots($page.value);
     <template #loading>Loading...</template>
     <template #error>Error</template>
     <template #success v-if="$robotsData">
-      <RobotList :robots="$robotsData.items" :page="$page" :pageSize="pageSize" />
+      <RobotList :robots="$robotsData.items" />
       <div class="robot-list-view__pagination">
         <ListPagination
           v-if="$robotsData.pages"

@@ -4,15 +4,13 @@ import RobotListItem from "./RobotListItem.vue";
 
 const props = defineProps<{
   robots: Array<Robot>;
-  page: number;
-  pageSize: number;
 }>();
 </script>
 
 <template>
   <ul class="robot-list">
-    <li v-for="(robot, idx) in props.robots" :key="robot.id" class="robot-list__item">
-      <RobotListItem :robot="robot" :index="(props.page - 1) * props.pageSize + (idx + 1)" />
+    <li v-for="robot in props.robots" :key="robot.id" class="robot-list__item">
+      <RobotListItem :robot="robot" />
     </li>
   </ul>
 </template>

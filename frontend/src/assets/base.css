@@ -20,15 +20,15 @@
   --grid-gap-5: 3rem;
   --grid-gap-6: 4rem;
 
-  --icon-size-s: 0.5rem;
-  --icon-size-m: 0.75rem;
-  --icon-size-l: 1rem;
-  --icon-size-xl: 1.25rem;
+  --icon-size-s: 0.75rem;
+  --icon-size-m: 1rem;
+  --icon-size-l: 1.25rem;
+  --icon-size-xl: 1.5rem;
 
   --border-radius-1: 0.25rem;
   --border-radius-2: 0.5rem;
 
-  --layout-gap: 1rem;
+  --layout-gap: 2rem;
 }
 
 :root {
@@ -46,9 +46,9 @@
 
   --color-white: #ffffff;
   --color-gray: #cccccc;
-  --color-success: #00dd00;
-  --color-warn: #ffdd00;
-  --color-alert: #dd0000;
+  --color-success: #00bb00;
+  --color-warn: #ffbb00;
+  --color-alert: #bb0000;
 }
 
 @media (min-width: 768px) {

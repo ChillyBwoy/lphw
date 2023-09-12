@@ -5,17 +5,11 @@ import Battery50Icon from "@heroicons/vue/24/solid/Battery50Icon";
 import XCircleIcon from "@heroicons/vue/24/solid/XCircleIcon";
 import ExclamationCircleIcon from "@heroicons/vue/24/solid/ExclamationCircleIcon";
 import PlayCircleIcon from "@heroicons/vue/24/solid/PlayCircleIcon";
-
 import { RobotStatus } from "@/client/models/RobotStatus";
 
 const props = defineProps<{
   status: RobotStatus;
 }>();
-
-const title = computed(() => {
-  const lower = props.status.toLowerCase();
-  return props.status.charAt(0).toUpperCase() + lower.slice(1);
-});
 
 const icon = computed(() => {
   switch (props.status) {
@@ -63,16 +57,10 @@ const color = computed(() => {
   height: var(--icon-size-xl);
   color: v-bind(color);
 }
-
-.robot-status__title {
-  font-weight: 600;
-  font-size: var(--font-size-s);
-}
 </style>
 
 <template>
   <div class="robot-status">
-    <div class="robot-status__title">{{ title }}</div>
     <icon />
   </div>
 </template>
