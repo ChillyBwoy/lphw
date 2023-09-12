@@ -8,8 +8,8 @@ import RobotForm from "@/components/Robot/RobotForm.vue";
 import PageTitle from "@/components/PageTitle.vue";
 import type { Robot, RobotCreate } from "@/client";
 
-const apiClient = useApiClient();
 const router = useRouter();
+const apiClient = useApiClient();
 
 const [createRobot, $createRobotData, $createRobotStatus, $createRobotError] = useFetchDataFunc(
   (payload: RobotCreate) => {
@@ -33,5 +33,9 @@ const handleSubmit = (robot: Partial<Robot>) => {
 
 <template>
   <PageTitle>Robot Create</PageTitle>
-  <RobotForm @submit="handleSubmit" :errors="$createRobotError?.body.errors" />
+  <RobotForm
+    @submit="handleSubmit"
+    :errors="$createRobotError?.body.errors"
+    :disabled="$createRobotStatus === 'loading'"
+  />
 </template>

@@ -11,6 +11,7 @@ type RobotFormErrors = Partial<Record<keyof Robot, Array<{ type: string; message
 const props = defineProps<{
   errors?: RobotFormErrors;
   robot?: Partial<Robot>;
+  disabled?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -68,7 +69,7 @@ const handleSubmit = (event: Event) => {
       </FormSelect>
     </FormFieldWrapper>
     <div>
-      <FormButton fullWidth size="l" type="submit">Add</FormButton>
+      <FormButton fullWidth size="l" type="submit" :disabled="props.disabled">Add</FormButton>
     </div>
   </form>
 </template>

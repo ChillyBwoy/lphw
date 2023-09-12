@@ -1,11 +1,17 @@
 <script lang="ts" setup>
 import { computed } from "vue";
 
-const props = defineProps<{
-  active?: boolean;
-  size?: "s" | "m" | "l";
-  fullWidth?: boolean;
-}>();
+const props = withDefaults(
+  defineProps<{
+    size?: "s" | "m" | "l";
+    fullWidth?: boolean;
+    color?: "primary" | "secondary" | "warn" | "success" | "alert";
+  }>(),
+  {
+    color: "primary",
+    size: "m",
+  },
+);
 
 const size = computed(() => {
   switch (props.size) {
@@ -18,9 +24,26 @@ const size = computed(() => {
   }
 });
 
+const bgColor = computed(() => {
+  switch (props.color) {
+    case "primary":
+      return "var(--color-link)";
+    case "secondary":
+      return "var(--color-text-secondary)";
+    case "warn":
+      return "var(--color-warn)";
+    case "success":
+      return "var(--color-success)";
+    case "alert":
+      return "var(--color-alert)";
+    default:
+      return "var(--color-link)";
+  }
+});
+
 const buttonClassName = computed(() => {
   return {
-    "form-button_active": props.active,
+    "form-button": true,
     "form-button_full": props.fullWidth,
     [size.value]: true,
   };
@@ -28,7 +51,7 @@ const buttonClassName = computed(() => {
 </script>
 
 <template>
-  <button class="form-button" :class="buttonClassName" v-bind="props">
+  <button :class="buttonClassName" :style="{ backgroundColor: bgColor }" v-bind="props">
     <slot></slot>
   </button>
 </template>
@@ -41,18 +64,12 @@ const buttonClassName = computed(() => {
   font-size: var(--font-size-m);
   border-radius: var(--border-radius-2);
   cursor: pointer;
-  background-color: var(--color-text-secondary);
   color: var(--color-text-white);
 }
 
 .form-button:disabled {
   opacity: 0.5;
   cursor: default;
-}
-
-.form-button_active {
-  background-color: var(--color-link);
-  color: var(--color-white);
 }
 
 .form-button_s {

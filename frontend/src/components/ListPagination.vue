@@ -100,7 +100,9 @@ const nextDisabled = computed(() => {
         <FormButton size="l" disabled>...</FormButton>
       </li>
       <li v-for="pageNum in pageRange" :key="pageNum">
-        <FormButton size="l" :active="pageNum === $page" @click="handleClickPage(pageNum)">{{ pageNum }}</FormButton>
+        <FormButton size="l" :color="pageNum === $page ? 'secondary' : 'primary'" @click="handleClickPage(pageNum)">{{
+          pageNum
+        }}</FormButton>
       </li>
       <li v-if="hasRightEllipsis">
         <FormButton size="l" disabled>...</FormButton>
