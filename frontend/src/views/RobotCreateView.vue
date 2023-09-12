@@ -32,7 +32,7 @@ const handleSubmit = (robot: Partial<Robot>) => {
 </script>
 
 <template>
-  <PageTitle>Robot Create</PageTitle>
+  <PageTitle :backUrl="routes.robotList()">Robot Create</PageTitle>
   <RobotForm
     @submit="handleSubmit"
     :errors="$createRobotError?.body.errors"

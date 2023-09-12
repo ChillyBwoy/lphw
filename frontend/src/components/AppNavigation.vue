@@ -29,7 +29,6 @@ import { routes } from "@/router/routes";
     <ul>
       <li><RouterLink :to="routes.home()" class="app-navigation__link">Home</RouterLink></li>
       <li><RouterLink :to="routes.robotList()" class="app-navigation__link">Robots</RouterLink></li>
-      <li><RouterLink :to="routes.robotCreate()" class="app-navigation__link">Add Robot</RouterLink></li>
     </ul>
   </nav>
 </template>

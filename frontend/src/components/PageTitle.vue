@@ -27,6 +27,13 @@ const props = defineProps<{
   width: var(--icon-size-xl);
   height: var(--icon-size-xl);
 }
+
+.page-title__content {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 </style>
 
 <template>
@@ -34,8 +41,13 @@ const props = defineProps<{
     <RouterLink v-if="props.backUrl" :to="props.backUrl" class="page-title__backurl">
       <ArrowLeftIcon />
     </RouterLink>
-    <h1 class="page-title__title">
-      <slot></slot>
-    </h1>
+    <div class="page-title__content">
+      <h1 class="page-title__title">
+        <slot></slot>
+      </h1>
+      <div class="page-title__right">
+        <slot name="side"></slot>
+      </div>
+    </div>
   </div>
 </template>
