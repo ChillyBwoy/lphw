@@ -43,7 +43,7 @@ const props = defineProps<{
 .form-field-wrapper__body {
   display: flex;
   flex-direction: column;
-  gap: var(--grid-gap-1);
+  gap: var(--spacing-1);
 }
 
 .form-field-wrapper__errorlist {
@@ -56,7 +56,7 @@ const props = defineProps<{
   font-size: var(--font-size-s);
   color: var(--color-alert);
   display: flex;
-  gap: var(--grid-gap-05);
+  gap: var(--spacing-05);
 }
 
 .form-field-wrapper__errorlist__icon {

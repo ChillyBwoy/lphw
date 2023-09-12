@@ -12,19 +12,19 @@ import AppNavigation from "@/components/AppNavigation.vue";
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--grid-gap-1);
+  padding: var(--spacing-1);
   background-color: var(--color-bg-main);
-  box-shadow: 0px var(--grid-gap-1) var(--grid-gap-2) 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0px var(--spacing-1) var(--spacing-2) 0 rgba(0, 0, 0, 0.2);
 }
 
 .app-layout__body {
-  padding: var(--grid-gap-2) var(--layout-gap) var(--grid-gap-5) var(--layout-gap);
+  padding: var(--spacing-2) var(--layout-gap) var(--spacing-5) var(--layout-gap);
 }
 
 .app-layout__footer {
   margin-top: auto;
   background-color: var(--color-bg-secondary);
-  min-height: var(--grid-gap-6);
+  min-height: var(--spacing-6);
 }
 </style>
 

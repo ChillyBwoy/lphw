@@ -19,7 +19,7 @@ const [$robotData, $robotStatus] = useFetchData(apiClient.robots.show({ id }));
 .robot-view__actions {
   display: flex;
   align-items: center;
-  gap: var(--grid-gap-3);
+  gap: var(--spacing-3);
 }
 </style>
 

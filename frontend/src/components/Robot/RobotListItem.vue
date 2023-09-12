@@ -27,11 +27,11 @@ const props = defineProps<{
 .robot-list-item {
   width: 100%;
   display: grid;
-  padding: var(--grid-gap-1) 0;
-  gap: var(--grid-gap-1);
+  padding: var(--spacing-1) 0;
+  gap: var(--spacing-1);
 
   grid-template-columns: auto 1fr 25%;
-  grid-auto-rows: minmax(auto, var(--grid-gap-4));
+  grid-auto-rows: minmax(auto, var(--spacing-4));
 
   grid-template-areas:
     "status name remaining-battery"
@@ -40,7 +40,7 @@ const props = defineProps<{
 
 @media (min-width: 768px) {
   .robot-list-item {
-    padding: var(--grid-gap-2) 0;
+    padding: var(--spacing-2) 0;
     grid-template-areas: "status name remaining-battery battery-health";
     grid-template-columns: auto 1fr 15% 15%;
     grid-auto-rows: minmax(auto, auto);
@@ -90,6 +90,6 @@ const props = defineProps<{
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  gap: var(--grid-gap-1);
+  gap: var(--spacing-1);
 }
 </style>

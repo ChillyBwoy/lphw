@@ -22,7 +22,7 @@ const color = computed(() => {
 <style scoped>
 .battery-status {
   width: 100%;
-  min-height: var(--grid-gap-2);
+  min-height: var(--spacing-2);
   background: var(--color-border-main);
   border-radius: var(--border-radius-2);
   position: relative;

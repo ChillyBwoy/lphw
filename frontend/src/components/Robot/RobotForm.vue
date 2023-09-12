@@ -78,6 +78,6 @@ const handleSubmit = (event: Event) => {
 .robot-form {
   display: flex;
   flex-direction: column;
-  gap: var(--grid-gap-2);
+  gap: var(--spacing-2);
 }
 </style>

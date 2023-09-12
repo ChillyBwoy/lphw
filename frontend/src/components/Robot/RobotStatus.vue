@@ -50,7 +50,7 @@ const color = computed(() => {
 .robot-status {
   display: flex;
   align-items: center;
-  gap: var(--grid-gap-05);
+  gap: var(--spacing-05);
 }
 .robot-status svg {
   width: var(--icon-size-xl);

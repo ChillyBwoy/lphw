@@ -58,7 +58,7 @@ const buttonClassName = computed(() => {
 
 <style scoped>
 .form-button {
-  padding: 0 var(--grid-gap-2);
+  padding: 0 var(--spacing-2);
   box-sizing: border-box;
   font-weight: 600;
   font-size: var(--font-size-m);
@@ -73,16 +73,16 @@ const buttonClassName = computed(() => {
 }
 
 .form-button_s {
-  min-width: var(--grid-gap-2);
-  min-height: var(--grid-gap-2);
+  min-width: var(--spacing-2);
+  min-height: var(--spacing-2);
 }
 .form-button_m {
-  min-width: var(--grid-gap-3);
-  min-height: var(--grid-gap-3);
+  min-width: var(--spacing-3);
+  min-height: var(--spacing-3);
 }
 .form-button_l {
-  min-width: var(--grid-gap-4);
-  min-height: var(--grid-gap-4);
+  min-width: var(--spacing-4);
+  min-height: var(--spacing-4);
 }
 
 .form-button_full {

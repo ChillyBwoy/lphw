@@ -38,7 +38,7 @@ const localValue = computed({
 .form-field input {
   width: 100%;
   box-sizing: border-box;
-  padding: 0 var(--grid-gap-1);
+  padding: 0 var(--spacing-1);
   border: 1px solid var(--color-border-main);
   border-radius: 0.25rem;
   height: 2.5rem;

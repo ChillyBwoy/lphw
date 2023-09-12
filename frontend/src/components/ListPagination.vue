@@ -76,12 +76,12 @@ const nextDisabled = computed(() => {
 <style scoped>
 .list-pagination {
   display: flex;
-  gap: var(--grid-gap-1);
+  gap: var(--spacing-1);
 }
 .list-pagination ul {
   list-style: none;
   display: flex;
-  gap: var(--grid-gap-1);
+  gap: var(--spacing-1);
 }
 
 .list-pagination__icon {

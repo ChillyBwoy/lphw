@@ -1,11 +1,4 @@
 :root {
-  --media-sm: 640px;
-  --media-md: 768px;
-  --media-lg: 1024px;
-  --media-xl: 1280px;
-}
-
-:root {
   --font-size-xs: 0.6rem;
   --font-size-s: 0.7rem;
   --font-size-m: 0.8rem;
@@ -13,13 +6,13 @@
   --font-size-xl: 1.5rem;
   --font-size-xxl: 2rem;
 
-  --grid-gap-05: 0.25rem;
-  --grid-gap-1: 0.5rem;
-  --grid-gap-2: 0.9rem;
-  --grid-gap-3: 1rem;
-  --grid-gap-4: 2rem;
-  --grid-gap-5: 3rem;
-  --grid-gap-6: 4rem;
+  --spacing-05: 0.25rem;
+  --spacing-1: 0.5rem;
+  --spacing-2: 0.9rem;
+  --spacing-3: 1rem;
+  --spacing-4: 2rem;
+  --spacing-5: 3rem;
+  --spacing-6: 4rem;
 
   --icon-size-s: 0.75rem;
   --icon-size-m: 1rem;
@@ -61,13 +54,13 @@
     --font-size-xl: 2rem;
     --font-size-xxl: 2.5rem;
 
-    --grid-gap-05: 0.25rem;
-    --grid-gap-1: 0.5rem;
-    --grid-gap-2: 1rem;
-    --grid-gap-3: 2rem;
-    --grid-gap-4: 3rem;
-    --grid-gap-5: 5rem;
-    --grid-gap-6: 8rem;
+    --spacing-05: 0.25rem;
+    --spacing-1: 0.5rem;
+    --spacing-2: 1rem;
+    --spacing-3: 2rem;
+    --spacing-4: 3rem;
+    --spacing-5: 5rem;
+    --spacing-6: 8rem;
 
     --icon-size-s: 1rem;
     --icon-size-m: 1.25rem;

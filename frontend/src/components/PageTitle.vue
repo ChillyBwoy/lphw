@@ -11,7 +11,7 @@ const props = defineProps<{
 .page-title {
   display: flex;
   align-items: center;
-  gap: var(--grid-gap-1);
+  gap: var(--spacing-1);
 }
 
 .page-title__title {
@@ -21,7 +21,7 @@ const props = defineProps<{
 }
 
 .page-title__backurl {
-  margin-left: calc(-1 * (var(--icon-size-xl) + var(--grid-gap-1)));
+  margin-left: calc(-1 * (var(--icon-size-xl) + var(--spacing-1)));
 }
 .page-title__backurl svg {
   width: var(--icon-size-xl);

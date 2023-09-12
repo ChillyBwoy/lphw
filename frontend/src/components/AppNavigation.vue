@@ -8,11 +8,11 @@ import { routes } from "@/router/routes";
   display: flex;
   list-style: none;
   padding: 0;
-  gap: var(--grid-gap-2);
+  gap: var(--spacing-2);
 }
 
 .app-navigation__link {
-  padding: var(--grid-gap-1);
+  padding: var(--spacing-1);
   display: block;
   border-radius: var(--border-radius-2);
   border: 1px solid var(--color-link);
