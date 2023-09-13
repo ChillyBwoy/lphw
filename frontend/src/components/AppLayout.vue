@@ -24,7 +24,6 @@ import AppNavigation from "@/components/AppNavigation.vue";
 
 .app-layout__footer {
   margin-top: auto;
-  background-color: var(--color-bg-secondary);
   min-height: var(--spacing-6);
 }
 </style>

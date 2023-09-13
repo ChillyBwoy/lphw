@@ -27,6 +27,7 @@ const localValue = computed({
   box-sizing: border-box;
   padding: 0 var(--spacing-1);
   border: 1px solid var(--color-border-primary);
+  background-color: var(--color-bg-primary);
   border-radius: 0.25rem;
   height: 2.5rem;
   appearance: none;

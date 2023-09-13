@@ -101,7 +101,7 @@ doSearch();
     </template>
     <template #side>
       <RouterLink :to="routes.robotCreate()" custom v-slot="{ navigate }">
-        <FormButton color="secondary" size="l" @click="navigate">
+        <FormButton size="l" @click="navigate">
           New
           <IconContainer>
             <PlusIcon />

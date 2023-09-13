@@ -41,6 +41,7 @@ const localValue = computed({
   padding: 0 var(--spacing-1);
   border: 1px solid var(--color-border-primary);
   border-radius: 0.25rem;
+  background-color: var(--color-bg-primary);
   height: 2.5rem;
 }
 

@@ -44,6 +44,8 @@ const handleCloseButtonClick = () => {
   outline: none;
   border-radius: var(--border-radius-2);
   padding: var(--spacing-2);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
 }
 .modal-dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.5);
