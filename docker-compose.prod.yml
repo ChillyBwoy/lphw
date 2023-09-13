@@ -38,6 +38,6 @@ services:
       dockerfile: Dockerfile.frontend
       args:
         - API_PORT=8000
-        - API_HOST=http://0.0.0.0
+        - API_HOST=http://localhost
     ports:
       - 3000:3000
