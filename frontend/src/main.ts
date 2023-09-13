@@ -10,11 +10,17 @@ const app = createApp(App);
 
 app.use(router);
 
+const host = import.meta.env.VITE_API_HOST;
+const port = import.meta.env.VITE_API_PORT;
+const apiUrl = `${host}:${port}`;
+
+console.log(`Api host: "${apiUrl}"`);
+
 // Inject the API client into the app so that it can be used in components
 app.provide(
   apiClientInjectKey,
   new ApiClient({
-    BASE: "http://localhost:8000",
+    BASE: apiUrl,
   }),
 );
 

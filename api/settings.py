@@ -7,7 +7,7 @@ from pydantic.networks import PostgresDsn
 
 
 class ServerSettings(BaseSettings):
-    allow_origins: list[str] = ["http://localhost:5173"]
+    allow_origins: list[str] = ["http://localhost:5173", "http://localhost:3000"]
     allow_credentials: bool = True
     allow_methods: list[str] = ["*"]
     allow_headers: list[str] = ["*"]
@@ -17,7 +17,7 @@ class DatabaseConfig(BaseSettings):
     database: Optional[str] = None
     username: Optional[str] = None
     password: Optional[str] = None
-    host: str = "0.0.0.0"
+    host: str = ""
     port: int = 5432
 
     @property
@@ -41,20 +41,20 @@ class BaseConfig(BaseSettings):
     model_config = SettingsConfigDict(env_nested_delimiter="_")
 
 
-class DevConfig(BaseConfig):
-    model_config = SettingsConfigDict(env_file=(".env", ".dev.env"))
+class LocalConfig(BaseConfig):
+    model_config = SettingsConfigDict(env_file=(".env.local"))
 
 
 class ProdConfig(BaseConfig):
-    model_config = SettingsConfigDict(env_file=(".env", ".prod.env"))
+    model_config = SettingsConfigDict(env_file=(".env.prod"))
 
 
 @lru_cache(maxsize=128)
-def get_settings() -> DevConfig | ProdConfig:
+def get_settings() -> LocalConfig | ProdConfig:
     env = os.environ.get("ENV", "dev")
 
     if env == "dev":
-        return DevConfig()
+        return LocalConfig()
     elif env == "prod":
         return ProdConfig()
     else:
