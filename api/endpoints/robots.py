@@ -17,7 +17,11 @@ router = APIRouter(prefix="/robots", tags=["robots"])
 
 @router.get("/", response_model=Page[schemas.Robot])
 async def list(
-    system_status: Optional[schemas.RobotStatus] = None, connected: Optional[bool] = None, db: Session = Depends(get_db)
+    system_status: Optional[schemas.RobotStatus] = None,
+    connected: Optional[bool] = None,
+    order_by: Optional[str] = "created_at",
+    order_direction: Optional[str] = "asc",
+    db: Session = Depends(get_db),
 ):
     query = select(Robot)
     if system_status:
@@ -26,9 +30,22 @@ async def list(
     if connected is not None:
         query = query.where(Robot.connected == connected)
 
-    query = query.order_by(Robot.created_at)
+    if order_by:
+        try:
+            order_by_column = getattr(Robot, order_by)
+        except AttributeError:
+            order_by_column = Robot.created_at
+    else:
+        order_by_column = Robot.created_at
 
-    return paginate(db, query.order_by(Robot.created_at))
+    if order_direction == "desc":
+        order_by_column = order_by_column.desc()
+    else:
+        order_by_column = order_by_column.asc()
+
+    query = query.order_by(order_by_column)
+
+    return paginate(db, query)
 
 
 @router.get("/{id}", response_model=schemas.Robot)

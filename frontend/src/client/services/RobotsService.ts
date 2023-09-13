@@ -22,11 +22,15 @@ export class RobotsService {
   public list({
     systemStatus,
     connected,
+    orderBy,
+    orderDirection,
     page = 1,
     size = 50,
   }: {
     systemStatus?: RobotStatus | null;
     connected?: boolean | null;
+    orderBy?: string | null;
+    orderDirection?: string | null;
     /**
      * Page number
      */
@@ -42,6 +46,8 @@ export class RobotsService {
       query: {
         system_status: systemStatus,
         connected: connected,
+        order_by: orderBy,
+        order_direction: orderDirection,
         page: page,
         size: size,
       },

@@ -8,6 +8,8 @@ import FormButton from "@/components/Form/FormButton.vue";
 export interface RobotSearchFormParams {
   systemStatus: RobotStatus;
   connected: string;
+  orderBy: string;
+  orderDirection: string;
 }
 
 const props = defineProps<{
@@ -20,18 +22,39 @@ const emit = defineEmits<{
 
 const $systemStatus = ref(props.modelValue.systemStatus ?? undefined);
 const $connected = ref(props.modelValue.connected ?? undefined);
+const $orderBy = ref(props.modelValue.orderBy ?? undefined);
+const $orderDirection = ref(props.modelValue.orderDirection ?? undefined);
 
 const systemStatusChoices = computed(() => {
   const data = Object.entries(RobotStatus);
-  return [["All", ""], ...data];
+  return [["", ""], ...data];
 });
 
 const connectedChoices = computed(
   () =>
     [
-      ["All", ""],
+      ["", ""],
       ["Connected", "true"],
       ["Disconnected", "false"],
+    ] as const,
+);
+
+const orderByChoices = computed(
+  () =>
+    [
+      ["", ""],
+      ["Name", "name"],
+      ["Status", "system_status"],
+      ["Connected", "connected"],
+    ] as const,
+);
+
+const orderDirectionChoices = computed(
+  () =>
+    [
+      ["", ""],
+      ["Ascending", "asc"],
+      ["Descending", "desc"],
     ] as const,
 );
 
@@ -41,6 +64,8 @@ const handleSubmit = (event: Event) => {
   emit("update:modelValue", {
     systemStatus: $systemStatus.value,
     connected: $connected.value,
+    orderBy: $orderBy.value,
+    orderDirection: $orderDirection.value,
   });
 };
 </script>
@@ -64,6 +89,18 @@ const handleSubmit = (event: Event) => {
     <FormFieldWrapper title="Connected">
       <FormSelect name="connected" v-model="$connected">
         <option v-for="[key, value] in connectedChoices" :key="key" :value="value">{{ key }}</option>
+      </FormSelect>
+    </FormFieldWrapper>
+
+    <FormFieldWrapper title="Sort">
+      <FormSelect name="order_by" v-model="$orderBy">
+        <option v-for="[key, value] in orderByChoices" :key="key" :value="value">{{ key }}</option>
+      </FormSelect>
+    </FormFieldWrapper>
+
+    <FormFieldWrapper title="Sort direction">
+      <FormSelect name="order_direction" v-model="$orderDirection">
+        <option v-for="[key, value] in orderDirectionChoices" :key="key" :value="value">{{ key }}</option>
       </FormSelect>
     </FormFieldWrapper>
 

@@ -17,6 +17,8 @@ interface RobotSeachParams {
   page: number;
   systemStatus?: RobotStatus | null;
   connected?: boolean;
+  orderBy?: string;
+  orderDirection?: string;
 }
 
 const apiClient = useApiClient();
@@ -33,6 +35,8 @@ const [fetchRobots, $robotsData, $robotsStatus] = useFetchDataFunc((params: Robo
     page: params.page,
     systemStatus: params.systemStatus,
     connected: params.connected,
+    orderBy: params.orderBy,
+    orderDirection: params.orderDirection,
   });
 });
 
@@ -48,6 +52,8 @@ const doSearch = () => {
     page: $page.value,
     systemStatus: $filterModel.value.systemStatus || undefined,
     connected,
+    orderBy: $filterModel.value.orderBy || undefined,
+    orderDirection: $filterModel.value.orderDirection || undefined,
   });
 };
 watch(

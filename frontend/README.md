@@ -1,52 +1,62 @@
-# frontend
+# Frontend: Building a Robot Management Interface with Vue.
 
-This template should help get you started developing with Vue 3 in Vite.
+## Background
 
-## Recommended IDE Setup
+Your task is to create a Vue.js user interface for managing a fleet of robots in a robot management service. The service should allow users to view, add, edit, and delete robots. While the frontend implementation is your responsibility, you're also required to implement the backend API endpoints for retrieving and manipulating robot data.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Backend API Endpoints
 
-## Type Support for `.vue` Imports in TS
+Create minimal implementation for the following API endpoints using a backend technology of your choice (e.g., Node.js, Flask, Django, fastapi etc.):
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+1. `GET /api/robots`: Retrieve a list of robots.
+2. `GET /api/robots/:id`: Retrieve details of a specific robot.
+3. `POST /api/robots`: Add a new robot to the list.
+4. `PUT /api/robots/:id`: Update details of an existing robot.
+5. `DELETE /api/robots/:id`: Delete a robot from the list.
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+Hint: the backend exists to support your frontend so only implement endpoints and functionality you need.
+Frontend: Building a Robot Management Interface with Vue.
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+## Requirements
 
-## Customize configuration
+### 1. Robot List
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+- Display a list of robots with their names, statuses, and additional information.
+- Fetch robot data from the provided API endpoints.
 
-## Project Setup
+### 2. Robot Details
 
-```sh
-npm install
-```
+- Implement a page where users can view detailed information about a selected robot.
+- Display all available data about the robot, including its specifications and status.
+- Provide a button to navigate back to the robot list.
 
-### Compile and Hot-Reload for Development
+### 3. Add/Edit Robot
 
-```sh
-npm run dev
-```
+- Create a form for adding a new robot or editing an existing one.
+- Include fields for robot name, specifications, and status.
+- Validate form inputs and show appropriate error messages.
 
-### Type-Check, Compile and Minify for Production
+### 4. Delete Robot
 
-```sh
-npm run build
-```
+- Implement a feature to delete a robot from the list.
+- Display a confirmation modal before proceeding with the deletion.
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+### 5. Styling and Responsiveness
 
-```sh
-npm run test:unit
-```
+- Apply CSS to create a clean and visually appealing interface.
+- Ensure the interface is responsive and functions well on both desktop and mobile devices.
 
-### Lint with [ESLint](https://eslint.org/)
+### 6. Bonus (Optional)
 
-```sh
-npm run lint
-```
+- Allow users to sort and filter the robot list based on various criteria (e.g., status, name).
+
+## Guidelines
+
+- Utilize Vue.js for constructing the user interface and managing state.
+- Organize your code in a modular and maintainable manner.
+- Document your code and offer a brief explanation of your design choices in a README file.
+- Implement the backend API endpoints according to the provided specifications.
+
+## Submission
+
+Provide a GitHub repository link to your project. Include clear instructions on running the project locally, and describe any extra steps required to test the functionality. Ensure that both the frontend and backend parts are included in your repository.
