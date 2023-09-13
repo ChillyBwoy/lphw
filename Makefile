@@ -11,6 +11,14 @@ define header
 
 Makefile for the API.
 Usage:
+  make help            show this help
+  make openapi         generate openapi.json
+  make run_dev         run the API in development mode
+  make run             run the API in production mode
+  make seed_dev        seed the database in development mode
+  make seed            seed the database in production mode
+  make migrate_dev     migrate the database in development mode
+  make migrate         migrate the database in production mode
   
 endef
 export header
@@ -26,6 +34,10 @@ openapi:
 .PHONY: run_dev
 run_dev:
 	uvicorn api.main:app --reload
+
+.PHONY: run
+run:
+	docker-compose -f docker-compose.prod.yml up -d --build
 
 .PHONY: seed_dev
 seed_dev:
