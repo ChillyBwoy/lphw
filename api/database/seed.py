@@ -15,6 +15,9 @@ args = parser.parse_args()
 
 
 def main():
+    """
+    Generate fake data for robots table.
+    """
     food = Food(locale=Locale.JA)
     transport = Transport()
     development = Development()

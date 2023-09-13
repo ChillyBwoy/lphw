@@ -9,6 +9,8 @@ import { apiClientInjectKey } from "./constants/injection";
 const app = createApp(App);
 
 app.use(router);
+
+// Inject the API client into the app so that it can be used in components
 app.provide(
   apiClientInjectKey,
   new ApiClient({

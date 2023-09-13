@@ -2,5 +2,6 @@
 .vscode
 
 *.pyc
-
-/.db
+/.venv/
+/.env/
+/.db/

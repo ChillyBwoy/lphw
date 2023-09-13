@@ -13,6 +13,16 @@ FormErrors = dict[str, list[FieldError]]
 
 
 def map_validation_error(exc: RequestValidationError) -> FormErrors:
+    """
+    Maps a FastAPI RequestValidationError to a dictionary of form errors for ease of use in the frontend
+
+    Args:
+        exc (RequestValidationError): The validation error to map.
+
+    Returns:
+        FormErrors: A dictionary of form errors, where the keys are the field names and the values are lists of FieldError
+        dictionaries containing the error type and message.
+    """
     errors: FormErrors = defaultdict(list)
 
     for err in exc.errors():

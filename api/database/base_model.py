@@ -6,6 +6,10 @@ from sqlalchemy.orm import DeclarativeBase, mapped_column, Mapped
 
 
 class TimestampsMixin:
+    """
+    Mixin for adding timestamps to a model.
+    """
+
     created_at: Mapped[datetime.datetime] = mapped_column(DateTime(timezone=True), insert_default=func.now())
     updated_at: Mapped[datetime.datetime] = mapped_column(
         DateTime(timezone=True), insert_default=func.now(), onupdate=func.now()

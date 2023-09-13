@@ -23,6 +23,9 @@ async def list(
     order_direction: Optional[str] = "asc",
     db: Session = Depends(get_db),
 ):
+    """
+    Returns a paginated list of robots filtered by system status, connected status and sorted by a given column and direction.
+    """
     query = select(Robot)
     if system_status:
         query = query.where(Robot.system_status == system_status)
@@ -57,6 +60,9 @@ async def show(id: uuid.UUID, db: Session = Depends(get_db)):
 async def create(robot: schemas.RobotCreate, db: Session = Depends(get_db)):
     db_robot = repo.get_by_serial_number(db, serial_number=robot.serial_number)
     if db_robot:
+        """
+        If a robot with the same serial number already exists, raise a custom validation error.
+        """
         raise RequestValidationError(
             errors=[
                 {
