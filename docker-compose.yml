@@ -2,12 +2,42 @@ version: "3"
 services:
   db:
     image: postgres:15.4-alpine
-    container_name: lphw_db_dev
+    container_name: lphw_db
     ports:
       - 5432:5432
     volumes:
       - .db:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: lphw
-      POSTGRES_PASSWORD: verystrongandsecurepassword
-      POSTGRES_DB: lphw_dev
+      - POSTGRES_USER=lphw
+      - POSTGRES_PASSWORD=verystrongandsecurepassword
+      - POSTGRES_DB=lphw_dev
+      - POSTGRES_HOST=0.0.0.0
+      - POSTGRES_PORT=5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    container_name: lphw_api
+    restart: always
+    build:
+      dockerfile: Dockerfile.api
+    ports:
+      - 8000:8000
+    environment:
+      - ENV=prod
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    container_name: lphw_frontend
+    build:
+      dockerfile: Dockerfile.frontend
+      args:
+        - API_PORT=8000
+        - API_HOST=http://0.0.0.0
+    ports:
+      - 3000:3000

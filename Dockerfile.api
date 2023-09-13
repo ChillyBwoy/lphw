@@ -1,0 +1,15 @@
+FROM python:3.11.4-alpine3.18
+
+WORKDIR /var/app
+
+ENV ENV=prod
+
+COPY ./api ./api
+COPY ./scripts ./scripts
+COPY ./alembic.ini ./alembic.ini
+COPY ./requirements.txt ./requirements.txt
+COPY ./.env.prod ./.env.prod
+
+RUN pip install -r requirements.txt
+
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]

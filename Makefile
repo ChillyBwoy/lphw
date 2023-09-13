@@ -11,28 +11,36 @@ define header
 
 Makefile for the API.
 Usage:
-  make openapi  Generate OpenAPI schema
-  make seed     Seed database with fake data
-  make help     Show this help message"
-  make run_dev  Run the API in development mode
+  
 endef
 export header
-
-
-.PHONY: openapi
-openapi:
-	python -m api.extract-openapi --app api.main:app --app-dir ./ --out openapi.json
-
-.PHONY: seed
-seed:
-	python -m api.database.seed --count 20
 
 .PHONY: help
 help:
 	@echo "$$header"
 
-.PHONE: run_dev
+.PHONY: openapi
+openapi:
+	python -m api.extract-openapi --app api.main:app --app-dir ./ --out openapi.json
+
+.PHONY: run_dev
 run_dev:
 	uvicorn api.main:app --reload
+
+.PHONY: seed_dev
+seed_dev:
+	python -m api.database.seed --count 50
+
+.PHONY: seed
+seed:
+	docker exec -it lphw_api python -m api.database.seed --count 50
+
+.PHONY: migrate_dev
+migrate_dev:
+	alembic upgrade head
+
+.PHONY: migrate
+migrate:
+	docker exec -it lphw_api alembic upgrade head
 
 .DEFAULT_GOAL := help

@@ -1,0 +1,22 @@
+FROM node:20.5.1-alpine3.18 as build
+
+ARG API_HOST
+ARG API_PORT
+ENV VITE_API_HOST=$API_HOST
+ENV VITE_ARG_API_PORT=$ARG_API_PORT
+
+WORKDIR /usr/src
+
+COPY ./frontend ./app
+
+WORKDIR /usr/src/app
+
+RUN npm ci
+RUN npm run build
+
+FROM nginx:1.21.1-alpine
+
+COPY --from=build /usr/src/app/dist /var/www
+COPY ./etc/nginx.frontend.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 3000
